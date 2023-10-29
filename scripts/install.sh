@@ -2,10 +2,16 @@
 #
 # Setup kubernetes cluster.
 # Add sops secret and default settings
-SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
+
+SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
 
 # Verify flux can install
 flux check --pre
+
+if [ $? -nq 0 ]; then
+    echo "flux check failed."
+    exit 1
+fi
 
 # Install Flux to k8s
 kubectl apply --kustomize kubernetes/bootstrap
