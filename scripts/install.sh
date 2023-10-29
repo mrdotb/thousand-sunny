@@ -8,7 +8,7 @@ SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt"
 # Verify flux can install
 flux check --pre
 
-if [ $? -nq 0 ]; then
+if [ $? -ne 0 ]; then
     echo "flux check failed."
     exit 1
 fi
