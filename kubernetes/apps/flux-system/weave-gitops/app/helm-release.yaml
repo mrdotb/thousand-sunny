@@ -29,7 +29,7 @@ spec:
     adminUser:
       create: true
       createSecret: false
-      username: admin
+      username: mrdotb
     ingress:
       enabled: false
       # className: nginx
