@@ -18,11 +18,10 @@ Setup and usage is inspired heavily by [this homelab gitops template](https://gi
 ### Setup
 
 ```sh
+asdf install
 pip3 install -r requirements.txt
-```
-
-```sh
 ./scripts/setup-age.sh
+./scripts/install.sh
 ```
 
 ### Lint
