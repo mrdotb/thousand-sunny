@@ -5,6 +5,7 @@ metadata:
   name: appdata
   namespace: monitoring
 spec:
+  volumeName: appdata-monitoring
   accessModes:
     - ReadWriteMany
   storageClassName: local-path
