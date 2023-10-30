@@ -5,5 +5,6 @@ resources:
   - coredns.yaml
   - grafana.yaml
   - jetstack.yaml
+  - kubernetes-dashboard.yaml
   - traefik.yaml
   - weave-gitops.yaml
