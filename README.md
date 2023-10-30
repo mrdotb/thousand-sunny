@@ -10,6 +10,7 @@ Setup and usage is inspired heavily by [this homelab gitops template](https://gi
 
 ### Requirements
 
+- [asdf](https://asdf-vm.com/)
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/)
 - [age](https://github.com/FiloSottile/age).
 - [flux](https://fluxcd.io/flux/installation/#install-the-flux-cli)
@@ -17,5 +18,15 @@ Setup and usage is inspired heavily by [this homelab gitops template](https://gi
 ### Setup
 
 ```sh
+pip3 install -r requirements.txt
+```
+
+```sh
 ./scripts/setup-age.sh
+```
+
+### Lint
+
+```sh
+./scripts/lint.sh
 ```
