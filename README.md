@@ -1,4 +1,5 @@
 # Thousand sunny
+![thousand sunny logo](https://raw.githubusercontent.com/mrdotb/i/master/thousand-sunny.png)
 
 ## Features
 
