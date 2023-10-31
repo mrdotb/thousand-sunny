@@ -1,0 +1,132 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plausible
+  namespace: analytics
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: plausible-analytics
+      version: 0.2.0
+      sourceRef:
+        kind: HelmRepository
+        name: mrdotb
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  # dependsOn:
+  #   - name: ingress-nginx
+  #     namespace: networking
+  values:
+    baseUrl: http://localhost
+    listenIp: 0.0.0.0
+    adminUser:
+      enabled: false
+    smtp:
+      enabled: false
+    postmark:
+      enabled: false
+    geolocation:
+      enabled: false
+    google:
+      enabled: true
+    twitter:
+      enabled: false
+    postgresql:
+      enabled: false
+    clickhouse:
+      enabled: false
+    secret:
+      existingSecret: plausible
+      create: false
+    ingress:
+      enabled: false
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plausible-postgres
+  namespace: analytics
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: postgresql
+      version: 13.1.5
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 15m
+  values:
+    auth:
+      username: postgres
+      existingSecret: plausible
+      database: plausible_db
+      secretKeys:
+        adminPasswordKey: POSTGRES_PASSWORD
+    replication:
+      enabled: false
+    metrics:
+      enabled: false
+    primary:
+      persistence:
+        enabled: true
+        existingClaim: appdata
+    podAnnotations:
+      secret.reloader.stakater.com/reload: plausible
+
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: plausible-clickhouse
+  namespace: analytics
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: clickhouse
+      version: 4.0.10
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+      interval: 15m
+  values:
+    auth:
+      username: clickhouse
+      existingSecret: plausible
+      existingSecretKey: CLICKHOUSE_PASSWORD
+      database: plausible_events_db
+    host: plausible-clickhouse
+    initContainersHttp:
+      enabled: false
+    initContainersClient:
+      enabled: false
+    initdbScripts:
+      db-init.sql: |
+        CREATE DATABASE IF NOT EXISTS plausible_events_db
+    # https://github.com/plausible/analytics/discussions/1603 clickhouse cluster is not supported
+    shards: 1
+    replicaCount: 1
+    zookeeper:
+      enabled: false
+    metrics:
+      enabled: false
+    persistence:
+      enabled: true
+      existingClaim: appdata
+    podAnnotations:
+      secret.reloader.stakater.com/reload: plausible
