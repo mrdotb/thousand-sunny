@@ -44,8 +44,10 @@ spec:
       enabled: false
     postgresql:
       enabled: false
+      host: plausible-postgres
     clickhouse:
       enabled: false
+      host: plausible-clickhouse
     secret:
       existingSecret: plausible
       create: false
