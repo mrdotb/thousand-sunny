@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./appdata-pvc.yaml
-  - ./plausible/ks.yaml
+  # - ./plausible/ks.yaml
