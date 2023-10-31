@@ -83,7 +83,6 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: appdata
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
 
@@ -127,6 +126,5 @@ spec:
       enabled: false
     persistence:
       enabled: true
-      existingClaim: appdata
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
