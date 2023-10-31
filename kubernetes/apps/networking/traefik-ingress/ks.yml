@@ -1,0 +1,16 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: apps-ingress-traefik
+  namespace: flux-system
+spec:
+  path: ./kubernetes/apps/networking/traefik-ingress/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: thousand-sunny
+  wait: false # no flux ks dependents
+  interval: 30m
+  retryInterval: 1m
+  timeout: 5m
