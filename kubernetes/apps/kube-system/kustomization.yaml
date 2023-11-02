@@ -5,4 +5,5 @@ resources:
   - ./namespace.yaml
   # - ./coredns/ks.yaml
   - ./local-path-provisioner/ks.yaml
+  - ./reloader/ks.yaml
   # - ./metrics-server/ks.yaml

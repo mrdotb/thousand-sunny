@@ -8,5 +8,6 @@ resources:
   - jetstack.yaml
   - kubernetes-dashboard.yaml
   - mrdotb.yaml
+  - stakater.yaml
   - traefik.yaml
   - weave-gitops.yaml
