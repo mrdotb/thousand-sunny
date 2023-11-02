@@ -7,7 +7,7 @@ resources:
   # - grafana
   # - healthchecks
   - kubernetes-dashboard
-  - ./kube-prometheus-stack/ks.yaml
+  # - ./kube-prometheus-stack/ks.yaml
   # - loki
   # - node-problem-detector
   # - prometheus
