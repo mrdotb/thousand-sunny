@@ -3,11 +3,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - namespace.yaml
-  - appdata-pvc.yaml
+  # - appdata-pvc.yaml
   # - grafana
   # - healthchecks
   - kubernetes-dashboard
-  # - kube-prometheus-stack
+  - kube-prometheus-stack
   # - loki
   # - node-problem-detector
   # - prometheus
