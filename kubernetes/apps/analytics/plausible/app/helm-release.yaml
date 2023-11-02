@@ -30,24 +30,12 @@ spec:
   values:
     baseUrl: http://localhost
     listenIp: 0.0.0.0
-    adminUser:
-      enabled: false
-    smtp:
-      enabled: false
-    postmark:
-      enabled: false
-    geolocation:
-      enabled: false
     google:
       enabled: true
-    twitter:
-      enabled: false
     postgresql:
       enabled: false
-      host: plausible-postgres
     clickhouse:
       enabled: false
-      host: plausible-clickhouse
     secret:
       existingSecret: plausible
       create: false
@@ -84,7 +72,7 @@ spec:
       enabled: false
     primary:
       persistence:
-        enabled: true
+        enabled: false
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
 
@@ -112,10 +100,6 @@ spec:
       existingSecretKey: CLICKHOUSE_PASSWORD
       database: plausible_events_db
     host: plausible-clickhouse
-    initContainersHttp:
-      enabled: false
-    initContainersClient:
-      enabled: false
     initdbScripts:
       db-init.sql: |
         CREATE DATABASE IF NOT EXISTS plausible_events_db
@@ -127,6 +111,6 @@ spec:
     metrics:
       enabled: false
     persistence:
-      enabled: true
+      enabled: false
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
