@@ -26,6 +26,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    alertmanager:
+      enabled: false
     grafana:
       enabled: true
       adminPassword: onizuka
