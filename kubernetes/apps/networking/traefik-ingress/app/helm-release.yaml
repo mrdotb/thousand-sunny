@@ -41,6 +41,8 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: cert-manager
+    - name: metrics-server
+      namespace: kube-system
   values:
     deployment:
       enabled: true
@@ -51,9 +53,9 @@ spec:
       spec:
         externalTrafficPolicy: Local
     autoscaling:
-      enabled: false
-      # minReplicas: 1
-      # maxReplicas: 3
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 3
     logs:
       general:
         format: json
