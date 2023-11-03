@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - namespace.yaml
   # - ./traefik-ingress/ks.yaml
-  # - ./ingress-nginx/ks.yaml
+  - ./ingress-nginx/ks.yaml
