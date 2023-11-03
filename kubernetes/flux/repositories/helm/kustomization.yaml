@@ -5,7 +5,7 @@ resources:
   - bitnami.yaml
   - coredns.yaml
   - grafana.yaml
-  - ingress-nginx.yaml
+  # - ingress-nginx.yaml
   - jetstack.yaml
   - kubernetes-dashboard.yaml
   - metrics-server.yaml
