@@ -30,3 +30,12 @@ pip3 install -r requirements.txt
 ```sh
 ./scripts/lint.sh
 ```
+
+### Dev
+
+I use [minikube](https://minikube.sigs.k8s.io)
+
+For the ingress we need to run the following command
+```sh
+minikube tunnel
+```
