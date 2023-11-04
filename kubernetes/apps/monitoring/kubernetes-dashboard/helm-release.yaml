@@ -26,9 +26,6 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  # dependsOn:
-  #   - name: ingress-nginx
-  #     namespace: networking
   values:
     env:
       TZ: "${TIMEZONE}"
@@ -40,13 +37,13 @@ spec:
     metricsScraper:
       enabled: false
     ingress:
-      enabled: false
-      # className: nginx
+      enabled: true
+      className: traefik
       # annotations:
       #   auth.home.arpa/enabled: "true"
       #   forecastle.stakater.com/icon: "kubernetes"
-      # hosts:
-      #   - &host "kubernetes.${PUBLIC_DOMAIN}"
+      hosts:
+        - &host "kubernetes.${PUBLIC_DOMAIN}"
       # tls:
       #   - hosts:
       #       - *host

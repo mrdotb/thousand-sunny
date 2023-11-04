@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: plausible
+  name: &app plausible
   namespace: analytics
 spec:
   interval: 15m
@@ -24,11 +24,8 @@ spec:
     cleanupOnFail: true
     remediation:
       retries: 3
-  # dependsOn:
-  #   - name: ingress-nginx
-  #     namespace: networking
   values:
-    baseUrl: http://localhost
+    baseUrl: "https://plausible.${PUBLIC_DOMAIN}"
     listenIp: 0.0.0.0
     google:
       enabled: true
@@ -40,7 +37,18 @@ spec:
       existingSecret: plausible
       create: false
     ingress:
-      enabled: false
+      enabled: true
+      className: traefik
+      path: /
+      pathType: Prefix
+      hosts:
+        - &host "plausible.${PUBLIC_DOMAIN}"
+      tls: []
+      annotations:
+        forecastle.stakater.com/expose: "true"
+        forecastle.stakater.com/icon: file-multiple
+    podAnnotations:
+      secret.reloader.stakater.com/reload: *app
 
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1

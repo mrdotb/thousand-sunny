@@ -2,8 +2,8 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plausible-postgresql
-  namespace: analytics
+  name: leseditionsdeparis
+  namespace: sites
   annotations:
     volumeType: local
 spec:
@@ -18,8 +18,8 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: plausible-clickhouse
-  namespace: analytics
+  name: leseditionsdeparis-postgresql
+  namespace: sites
   annotations:
     volumeType: local
 spec:

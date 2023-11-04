@@ -1,5 +1,16 @@
-# Thousand sunny
-![thousand sunny logo](https://raw.githubusercontent.com/mrdotb/i/master/thousand-sunny.png)
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/mrdotb/i/master/thousand-sunny.png" align="center" width="144px" height="144px" />
+
+# Thousand sunny my operations repository
+_... managed with Flux, Renovate, and GitHub Actions_ 🤖
+<br />
+
+</div>
+
+[![Kubernetes](https://img.shields.io/badge/v1.28-blue?style=for-the-badge&logo=kubernetes&logoColor=white)](https://k3s.io/)&nbsp;&nbsp;&nbsp;
+
+---
 
 ## Features
 
