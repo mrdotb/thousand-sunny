@@ -9,4 +9,3 @@ resources:
   - flux-system
   - kube-system
   - monitoring
-  # - networking
