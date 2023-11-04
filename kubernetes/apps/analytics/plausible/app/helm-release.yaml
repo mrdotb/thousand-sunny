@@ -72,7 +72,8 @@ spec:
       enabled: false
     primary:
       persistence:
-        enabled: false
+        enabled: true
+        existingClaim: plausible-postgres
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
 
@@ -110,6 +111,7 @@ spec:
     metrics:
       enabled: false
     persistence:
-      enabled: false
+      enabled: true
+      existingClaim: plausible-clickhouse
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
