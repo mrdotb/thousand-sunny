@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeName: plausible-postgresql
-  storageClassName: ""
+  storageClassName: local-path
   resources:
     requests:
       storage: 10G
@@ -23,7 +23,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeName: plausible-clickhouse
-  storageClassName: ""
+  storageClassName: local-path
   resources:
     requests:
       storage: 10G
