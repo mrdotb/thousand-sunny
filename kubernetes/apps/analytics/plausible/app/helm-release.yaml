@@ -73,7 +73,7 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: plausible-postgres
+        existingClaim: plausible-postgresql
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
 
