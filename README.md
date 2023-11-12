@@ -42,10 +42,5 @@ yaml is linted with [yamllint](https://github.com/adrienverge/yamllint) on `pre-
 
 ### Dev
 
-I use [minikube](https://minikube.sigs.k8s.io)
+I use [kind](https://kind.sigs.k8s.io/)
 Install the git hook with [lefthook](https://github.com/evilmartians/lefthook/tree/master)
-
-For the ingress we need to run the following command
-```sh
-minikube tunnel
-```
