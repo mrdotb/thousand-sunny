@@ -38,13 +38,12 @@ pip3 install -r requirements.txt
 
 ### Lint
 
-```sh
-./scripts/lint.sh
-```
+yaml is linted with [yamllint](https://github.com/adrienverge/yamllint) on `pre-commit`
 
 ### Dev
 
 I use [minikube](https://minikube.sigs.k8s.io)
+Install the git hook with [lefthook](https://github.com/evilmartians/lefthook/tree/master)
 
 For the ingress we need to run the following command
 ```sh

@@ -1,0 +1,5 @@
+---
+pre-commit:
+  scripts:
+    "lint.sh":
+      runner: bash
