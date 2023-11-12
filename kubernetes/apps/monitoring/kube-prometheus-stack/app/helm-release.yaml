@@ -26,8 +26,29 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    crds:
+      enabled: true
+
+    ### Component values
+
     alertmanager:
       enabled: false
+
+    kubeApiServer:
+      enabled: true
+
+    kubeEtcd:
+      enabled: false
+
     grafana:
       enabled: true
       adminPassword: onizuka
+
+    prometheus:
+      prometheusSpec:
+        # Ensure all PodMonitor / ServiceMonitor resources are picked up properly:
+        # https://stackoverflow.com/questions/68085831/add-podmonitor-or-servicemonitor-outside-of-kube-prometheus-stack-helm-values
+        podMonitorSelectorNilUsesHelmValues: false
+        probeSelectorNilUsesHelmValues: false
+        ruleSelectorNilUsesHelmValues: false
+        serviceMonitorSelectorNilUsesHelmValues: false
