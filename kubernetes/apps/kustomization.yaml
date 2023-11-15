@@ -6,7 +6,7 @@ kind: Kustomization
 resources:
   - analytics
   - cert-manager
-  # - database
+  - database
   - flux-system
   - kube-system
   - monitoring
