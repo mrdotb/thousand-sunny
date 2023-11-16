@@ -1,0 +1,52 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: storage
+spec:
+  interval: 15m
+  timeout: 10m
+  chart:
+    spec:
+      chart: minio
+      version: 12.10.1
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  install:
+    remediation:
+      retries: 3
+  upgrade:
+    remediation:
+      retries: 5
+      remediateLastFailure: true
+  values:
+    image:
+      registry: docker.io
+      repository: bitnami/minio
+      tag: 2023.11.11-debian-11-r0
+    auth:
+      rootUser: admin
+      existingSecret: minio
+    persistence:
+      enabled: true
+      existingClaim: minio
+    metrics:
+      serviceMonitor:
+        enabled: true
+        namespace: monitoring
+    extraEnvVars:
+      - name: TZ
+        value: "${TIMEZONE}"
+      - name: MINIO_PROMETHEUS_URL
+        value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+      - name: MINIO_PROMETHEUS_JOB_ID
+        value: minio
+      # - name: MINIO_BROWSER_REDIRECT_URL
+      #   value: "https://s3.${PUBLIC_DOMAIN}"
+      # - name: MINIO_SERVER_URL
+      #   value: "https://s3.${PUBLIC_DOMAIN}"
+      # - name: MINIO_API_CORS_ALLOW_ORIGIN
+      #   value: "https://s3.${PUBLIC_DOMAIN}"

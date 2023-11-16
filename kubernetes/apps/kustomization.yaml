@@ -7,7 +7,8 @@ resources:
   - analytics
   - cert-manager
   - database
+  - default
   - flux-system
   - kube-system
   - monitoring
-  - sites
+  - storage
