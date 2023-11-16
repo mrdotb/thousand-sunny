@@ -5,15 +5,4 @@ namespace: database
 resources:
   - ./helm-release.yaml
   - ./secret.sops.yaml
-configMapGenerator:
-  - name: cloudnative-pg-dashboard
-    files:
-      - cloudnative-pg-dashboard.json=https://raw.githubusercontent.com/cloudnative-pg/cloudnative-pg/main/docs/src/samples/monitoring/grafana-dashboard.json
-generatorOptions:
-  disableNameSuffixHash: true
-  annotations:
-    kustomize.toolkit.fluxcd.io/substitute: disabled
-    grafana_folder: cloudnative-pg
-  labels:
-    grafana_dashboard: "true"
-    grafana_folder: "database"
+  - ./dashboard
