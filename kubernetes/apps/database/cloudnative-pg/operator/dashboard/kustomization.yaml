@@ -9,7 +9,5 @@ generatorOptions:
   disableNameSuffixHash: true
   annotations:
     kustomize.toolkit.fluxcd.io/substitute: disabled
-    grafana_folder: cloudnative-pg
   labels:
-    grafana_dashboard: "true"
-    grafana_folder: "database"
+    grafana_dashboard: "1"
