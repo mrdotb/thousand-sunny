@@ -1,12 +1,12 @@
 ---
 originRequest:
   http2Origin: true
+  # For letsencrypt staging cert
+  noTLSVerify: true
 
 ingress:
-  - hostname: "gitops.${PUBLIC_DOMAIN}"
-    service: http://traefik.default.svc.cluster.local:80
+  - hostname: "*.${PUBLIC_DOMAIN}"
+    service: https://traefik.default.svc.cluster.local
   # - hostname: "*.${PUBLIC_DOMAIN}"
-  #   service: https://ingress.default.svc.cluster.local:443
-    # originRequest:
-    #   originServerName: external.devbu.io
+  #   service: http://traefik.default.svc.cluster.local
   - service: http_status:404

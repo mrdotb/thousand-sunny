@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "gitops.${PUBLIC_DOMAIN}"
+  namespace: flux-system
+spec:
+  secretName: "gitops.${PUBLIC_DOMAIN}"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "gitops.${PUBLIC_DOMAIN}"

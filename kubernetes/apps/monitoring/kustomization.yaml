@@ -6,7 +6,7 @@ resources:
   # - appdata-pvc.yaml
   # - grafana
   # - healthchecks
-  - kubernetes-dashboard
+  - kubernetes-dashboard/ks.yaml
   - kube-prometheus-stack/ks.yaml
   # - loki
   # - node-problem-detector
