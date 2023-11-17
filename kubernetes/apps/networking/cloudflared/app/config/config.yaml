@@ -1,0 +1,12 @@
+---
+originRequest:
+  http2Origin: true
+
+ingress:
+  - hostname: "gitops.${PUBLIC_DOMAIN}"
+    service: http://traefik.default.svc.cluster.local:80
+  # - hostname: "*.${PUBLIC_DOMAIN}"
+  #   service: https://ingress.default.svc.cluster.local:443
+    # originRequest:
+    #   originServerName: external.devbu.io
+  - service: http_status:404
