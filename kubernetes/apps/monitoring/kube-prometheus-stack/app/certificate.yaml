@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "grafana.${PUBLIC_DOMAIN}"
+  namespace: monitoring
+spec:
+  secretName: "grafana.${PUBLIC_DOMAIN}"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "grafana.${PUBLIC_DOMAIN}"

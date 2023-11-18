@@ -43,7 +43,18 @@ spec:
 
     grafana:
       enabled: true
-      adminPassword: onizuka
+      admin:
+        existingSecret: "grafana"
+      ingress:
+        enabled: true
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+        hosts:
+          - &host "grafana.${PUBLIC_DOMAIN}"
+        tls:
+          - secretName: *host
+            hosts:
+              - *host
 
       sidecar:
         dashboards:
