@@ -1,0 +1,26 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "s3.${PUBLIC_DOMAIN}"
+  namespace: storage
+spec:
+  secretName: "s3.${PUBLIC_DOMAIN}"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "s3.${PUBLIC_DOMAIN}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "minio.${PUBLIC_DOMAIN}"
+  namespace: storage
+spec:
+  secretName: "minio.${PUBLIC_DOMAIN}"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "minio.${PUBLIC_DOMAIN}"
