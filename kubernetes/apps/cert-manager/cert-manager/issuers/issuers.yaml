@@ -20,3 +20,9 @@ spec:
           dnsZones:
             - "${PUBLIC_DOMAIN}"
             - "*.${PUBLIC_DOMAIN}"
+            - "leseditionsdeparis.com"
+            - "*.leseditionsdeparis.com"
+            - "tontontresors.co"
+            - "*.tontontresors.co"
+            - "leagueofreplays.co"
+            - "*.leagueofreplays.co"
