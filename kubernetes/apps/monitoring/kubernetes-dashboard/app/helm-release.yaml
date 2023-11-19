@@ -37,8 +37,6 @@ spec:
       enabled: false
     web:
       containers:
-        args:
-          - --token-ttl=43200 # seconds time to expire
         env:
           - name: TZ
             value: "${TIMEZONE}"
