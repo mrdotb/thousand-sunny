@@ -59,7 +59,7 @@ spec:
         mountPath: /srv/leseditionsdeparis
     volumes:
       - name: edp-images
-        PersistentVolumeClaim:
+        persistentVolumeClaim:
           claimName: leseditionsdeparis
 ---
 apiVersion: postgresql.cnpg.io/v1
