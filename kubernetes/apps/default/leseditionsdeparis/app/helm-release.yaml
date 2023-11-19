@@ -30,7 +30,17 @@ spec:
       existingSecret: leseditionsdeparis
       create: false
     ingress:
-      enabled: false
+      enabled: true
+      className: traefik
+      hosts:
+        - host: &host "staging.leseditionsdeparis.com"
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - *host
+          secretName: *host
     image:
       repository: ghcr.io/mrdotb/leseditionsdeparis
       pullPolicy: Always
@@ -44,19 +54,31 @@ spec:
     migration:
       enabled: true
       command: ["/app/bin/migrate"]
+    volumeMounts:
+      - name: edp-images
+        mountPath: /srv/leseditionsdeparis
+    volumes:
+      - name: edp-images
+        PersistentVolumeClaim:
+          claimName: leseditionsdeparis
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: leseditionsdeparis-pg
+  name: leseditionsdeparis-postgres
   namespace: default
 spec:
   instances: 1
   imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
   primaryUpdateStrategy: unsupervised
   storage:
-    size: 10Gi
-    storageClass: local-path
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: local-path
+      resources:
+        requests:
+          storage: 10G
   bootstrap:
     initdb:
       database: edp
