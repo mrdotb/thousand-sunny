@@ -26,6 +26,7 @@ Setup and usage is inspired heavily by [this homelab gitops template](https://gi
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/)
 - [age](https://github.com/FiloSottile/age).
 - [flux](https://fluxcd.io/flux/installation/#install-the-flux-cli)
+- [cloudflared](https://github.com/cloudflare/cloudflared)
 
 ### Setup
 
