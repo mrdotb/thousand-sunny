@@ -47,7 +47,7 @@ spec:
               - --config
               - /etc/cloudflared/config/config.yaml
               - run
-              - "${CLOUDFLARE_MRDOTB_TUNNEL_ID}"
+              - "${CLOUDFLARE_TUNNEL_ID}"
             probes:
               liveness: &probes
                 enabled: true
