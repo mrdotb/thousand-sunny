@@ -25,6 +25,7 @@ spec:
     remediation:
       retries: 3
   values:
+    replicaCount: 0
     baseUrl: "https://analytics.${PUBLIC_DOMAIN}"
     listenIp: 0.0.0.0
     google:
@@ -132,12 +133,9 @@ spec:
       existingSecret: plausible
       existingSecretKey: CLICKHOUSE_PASSWORD
       database: plausible_events_db
-    initdbScripts:
-      db-init.sql: |
-        CREATE DATABASE IF NOT EXISTS plausible_events_db
     # https://github.com/plausible/analytics/discussions/1603 clickhouse cluster is not supported
-    shards: 1
     replicaCount: 1
+    shards: 1
     zookeeper:
       enabled: false
     metrics:
