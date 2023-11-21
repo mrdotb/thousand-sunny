@@ -1,0 +1,19 @@
+---
+- name: Install cifs
+  ansible.builtin.package:
+    state: latest
+    name:
+      - cifs-utils
+
+- name: Create mount point
+  ansible.builtin.file:
+    path: "{{ mount_point }}"
+    state: directory
+
+- name: Mount CIFS Share
+  ansible.builtin.mount:
+    path: "{{ mount_point }}"
+    src: '//{{ cifs_server }}/{{ cifs_sharename }}'
+    fstype: cifs
+    opts: "username={{ cifs_username }},password={{ cifs_password }}"
+    state: mounted

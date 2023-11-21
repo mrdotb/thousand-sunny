@@ -1,14 +1,12 @@
 ---
-# This playbook is run on a fresh server and launched from root user
 - hosts:
     - kubernetes
-  vars:
-    ansible_user: root
-    ansible_port: 22
+  become: true
   tasks:
     - name: Load encrypted vars
       community.sops.load_vars:
         file: ../vars.sops.yaml
         expressions: evaluate-on-load
+
   roles:
-    - setup
+    - backup

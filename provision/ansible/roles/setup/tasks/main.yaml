@@ -1,0 +1,103 @@
+---
+- name: Update
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Upgrade
+  ansible.builtin.apt:
+    upgrade: dist
+
+- name: Install basic packages
+  ansible.builtin.package:
+    state: latest
+    name:
+      - base
+      - curl
+      - git
+      - mailutils
+      - sudo
+      - tmux
+      - ufw
+      - vim
+      - zsh
+
+- name: Create user
+  user:
+    name: "{{ username }}"
+    password: "{{ user_password | password_hash('sha512') }}"
+    shell: /bin/zsh
+    create_home: true
+    groups: 'sudo,users'
+    append: true
+
+- name: Copy SSH public key to server
+  ansible.builtin.authorized_key:
+    user: "{{ username }}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: Change root shell to zsh
+  user:
+    name: root
+    shell: /bin/zsh
+
+- name: Install & config unattended upgrades
+  ansible.builtin.include_role:
+    name: andrewrothstein.starship
+  vars:
+    unattended_mail: 'mrdotb@protonmail.com'
+
+- name: Install startship prompt
+  ansible.builtin.include_role:
+    name: andrewrothstein.starship
+
+- name: Install fzf for username
+  git:
+    repo: 'https://github.com/junegunn/fzf.git'
+    dest: "/home/{{ username }}/.fzf"
+    depth: 1
+  become_user: "{{ username }}"
+
+- name: Run fzf install script
+  shell: "~/.fzf/install --no-bash --no-fish --no-update-rc --no-completion --key-bindings"
+  become_user: "{{ username }}"
+  args:
+    executable: /bin/bash
+  environment:
+    HOME: "/home/{{ username }}"
+
+- name: Write .zshrc for user
+  copy:
+    src: files/zshrc.j2
+    dest: "/home/{{ username }}/.zshrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: '0644'
+
+- name: Harden sshd
+  ansible.builtin.include_role:
+    name: devsec.hardening.ssh_hardening
+  vars:
+    network_ipv6_enable: false
+    ssh_allow_groups: "{{ username }}"
+    ssh_allow_users: "{{ username }}"
+    ssh_server_ports: ["{{ ssh_client_port }}"]
+
+- name: Allow SSH traffic
+  ufw:
+    rule: allow
+    port: "{{ ssh_client_port }}"
+    proto: tcp
+
+- name: Allow Kube api
+  ufw:
+    rule: allow
+    port: '6443'
+    proto: tcp
+
+- name: Disable other traffic
+  ufw:
+    direction: incoming
+    policy: deny
+    state: enabled

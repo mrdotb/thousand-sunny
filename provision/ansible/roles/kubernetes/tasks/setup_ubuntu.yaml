@@ -1,1 +1,7 @@
 ---
+- name: Disable swap
+  ansible.posix.mount:
+    name: "{{ item }}"
+    fstype: swap
+    state: absent
+  loop: ["none", "swap"]
