@@ -2,4 +2,4 @@
 kubernetes:
   hosts:
     stern:
-      ansible_host: 127.0.0.1
+      ansible_host: 65.109.145.61
