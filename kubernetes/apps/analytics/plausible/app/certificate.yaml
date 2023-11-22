@@ -2,12 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "analytics.${PUBLIC_DOMAIN}"
+  name: "plausible.${PUBLIC_DOMAIN}"
   namespace: analytics
 spec:
-  secretName: "analytics.${PUBLIC_DOMAIN}"
+  secretName: "plausible.${PUBLIC_DOMAIN}"
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
   dnsNames:
-    - "analytics.${PUBLIC_DOMAIN}"
+    - "plausible.${PUBLIC_DOMAIN}"

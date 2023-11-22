@@ -25,7 +25,7 @@ spec:
     remediation:
       retries: 3
   values:
-    replicaCount: 0
+    replicaCount: 1
     secret:
       existingSecret: leseditionsdeparis
       create: false
@@ -33,7 +33,7 @@ spec:
       enabled: true
       className: traefik
       hosts:
-        - host: &host "staging.leseditionsdeparis.com"
+        - host: &host "leseditionsdeparis.com"
           paths:
             - path: /
               pathType: ImplementationSpecific
@@ -52,7 +52,7 @@ spec:
       type: ClusterIP
       port: 4000
     migration:
-      enabled: false
+      enabled: true
       command: ["/app/bin/migrate"]
     volumeMounts:
       - name: edp-images

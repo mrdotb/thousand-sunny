@@ -25,8 +25,8 @@ spec:
     remediation:
       retries: 3
   values:
-    replicaCount: 0
-    baseUrl: "https://analytics.${PUBLIC_DOMAIN}"
+    replicaCount: 1
+    baseUrl: "https://plausible.${PUBLIC_DOMAIN}"
     listenIp: 0.0.0.0
     google:
       enabled: true
@@ -43,7 +43,7 @@ spec:
       path: /
       pathType: Prefix
       hosts:
-        - &host "analytics.${PUBLIC_DOMAIN}"
+        - &host "plausible.${PUBLIC_DOMAIN}"
       tls:
         - hosts:
             - *host

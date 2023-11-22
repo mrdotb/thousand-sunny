@@ -2,12 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "staging.leseditionsdeparis.com"
+  name: "leseditionsdeparis.com"
   namespace: default
 spec:
-  secretName: "staging.leseditionsdeparis.com"
+  secretName: "leseditionsdeparis.com"
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
   dnsNames:
-    - "staging.leseditionsdeparis.com"
+    - "leseditionsdeparis.com"
