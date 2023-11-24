@@ -145,3 +145,7 @@ spec:
       existingClaim: plausible-clickhouse
     podAnnotations:
       secret.reloader.stakater.com/reload: plausible
+    resources:
+      requests:
+        memory: "2048Mi"
+        cpu: "200m"
