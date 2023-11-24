@@ -61,6 +61,10 @@ spec:
       - name: edp-images
         persistentVolumeClaim:
           claimName: leseditionsdeparis
+    resources:
+      requests:
+        memory: "512Mi"
+        cpu: "20m"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
