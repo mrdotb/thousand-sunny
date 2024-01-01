@@ -33,7 +33,7 @@ spec:
       enabled: true
       className: traefik
       hosts:
-        - host: &host "probuild.mrdotb.com"
+        - host: &host "probuild.${PUBLIC_DOMAIN}.com"
           paths:
             - path: /
               pathType: ImplementationSpecific
@@ -95,19 +95,19 @@ spec:
       memory: "1Gi"
   monitoring:
     enablePodMonitor: true
-  # backup:
-  #   retentionPolicy: 30d
-  #   barmanObjectStore:
-  #     wal:
-  #       compression: bzip2
-  #       maxParallel: 8
-  #     destinationPath: s3://cnpg-zd6qkutg/
-  #     endpointURL: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
-  #     serverName: &currentCluster postgres16-v1
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: cloudnative-pg-secret
-  #         key: aws-access-key-id
-  #       secretAccessKey:
-  #         name: cloudnative-pg-secret
-  #         key: aws-secret-access-key
+  backup:
+    retentionPolicy: 2d
+    barmanObjectStore:
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://probuild-ex/
+      endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+      serverName: &currentCluster postgres16-v1
+      s3Credentials:
+        accessKeyId:
+          name: cloudnative-pg
+          key: access_key
+        secretAccessKey:
+          name: cloudnative-pg
+          key: secret_key
