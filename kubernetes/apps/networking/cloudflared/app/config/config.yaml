@@ -12,3 +12,6 @@ ingress:
   - hostname: "leseditionsdeparis.com"
     service: https://traefik.kube-system.svc.cluster.local
   - service: http_status:404
+  - hostname: "tontontresors.com"
+    service: https://traefik.kube-system.svc.cluster.local
+  - service: http_status:404

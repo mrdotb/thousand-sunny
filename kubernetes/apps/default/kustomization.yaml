@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./leseditionsdeparis/ks.yaml
+  - ./probuild_ex/ks.yaml
