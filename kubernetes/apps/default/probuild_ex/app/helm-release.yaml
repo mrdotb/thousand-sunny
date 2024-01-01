@@ -96,8 +96,10 @@ spec:
   monitoring:
     enablePodMonitor: true
   backup:
-    retentionPolicy: 2d
+    retentionPolicy: 30d
     barmanObjectStore:
+      data:
+        compression: bzip2
       wal:
         compression: bzip2
         maxParallel: 8
@@ -111,3 +113,16 @@ spec:
         secretAccessKey:
           name: probuild-ex
           key: secret_key
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: probuild-ex-postgres-scheduled-backup
+  namespace: default
+spec:
+  immediate: true
+  schedule: "@weekly"
+  cluster:
+    name: probuild-ex-postgres
+  target: primary
+  method: barmanObjectStore

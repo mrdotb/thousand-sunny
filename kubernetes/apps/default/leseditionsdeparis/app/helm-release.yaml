@@ -104,19 +104,34 @@ spec:
       memory: "1Gi"
   monitoring:
     enablePodMonitor: true
-  # backup:
-  #   retentionPolicy: 30d
-  #   barmanObjectStore:
-  #     wal:
-  #       compression: bzip2
-  #       maxParallel: 8
-  #     destinationPath: s3://cnpg-zd6qkutg/
-  #     endpointURL: https://${SECRET_CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com
-  #     serverName: &currentCluster postgres16-v1
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: cloudnative-pg-secret
-  #         key: aws-access-key-id
-  #       secretAccessKey:
-  #         name: cloudnative-pg-secret
-  #         key: aws-secret-access-key
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://leseditionsdeparis/
+      endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+      serverName: &currentCluster postgres16-v1
+      s3Credentials:
+        accessKeyId:
+          name: leseditionsdeparis
+          key: access_key
+        secretAccessKey:
+          name: leseditionsdeparis
+          key: secret_key
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: leseditionsdeparis-postgres-scheduled-backup
+  namespace: default
+spec:
+  immediate: true
+  schedule: "@weekly"
+  cluster:
+    name: leseditionsdeparis-postgres
+  target: primary
+  method: barmanObjectStore
