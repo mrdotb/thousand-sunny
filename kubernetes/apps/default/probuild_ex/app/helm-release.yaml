@@ -106,8 +106,8 @@ spec:
       serverName: &currentCluster postgres16-v1
       s3Credentials:
         accessKeyId:
-          name: cloudnative-pg
+          name: probuild-ex
           key: access_key
         secretAccessKey:
-          name: cloudnative-pg
+          name: probuild-ex
           key: secret_key
