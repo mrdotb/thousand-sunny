@@ -63,8 +63,8 @@ spec:
           claimName: leseditionsdeparis
     resources:
       requests:
-        memory: "512Mi"
-        cpu: "20m"
+        memory: "384Mi"
+        cpu: "15m"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
