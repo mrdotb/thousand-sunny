@@ -24,3 +24,16 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - "minio.${PUBLIC_DOMAIN}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "cdntest.tontontresors.com"
+  namespace: storage
+spec:
+  secretName: "cdntest.tontontresors.com"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "cdntest.tontontresors.com"
