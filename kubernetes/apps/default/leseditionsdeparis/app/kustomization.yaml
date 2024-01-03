@@ -7,3 +7,4 @@ resources:
   - ./secret.sops.yaml
   - ./registry
   - ./helm-release.yaml
+  - ./cron-job.yaml

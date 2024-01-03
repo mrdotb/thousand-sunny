@@ -1,0 +1,32 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: leseditionsdeparis-cron-job
+  namespace: default
+spec:
+  schedule: "@weekly"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: leseditionsdeparis-backup
+              image: eeacms/rsync:2.4
+              command: ["/bin/sh", "-c"]
+              args:
+                - |
+                  rsync -av /srv/leseditionsdeparis /mnt/backup/leseditionsdeparis/
+              volumeMounts:
+                - name: edp-images
+                  mountPath: /srv/leseditionsdeparis
+                - name: backup-vol
+                  mountPath: /mnt/backup
+          volumes:
+            - name: edp-images
+              persistentVolumeClaim:
+                claimName: leseditionsdeparis
+            - name: backup-vol
+              hostPath:
+                path: /mnt/backup
