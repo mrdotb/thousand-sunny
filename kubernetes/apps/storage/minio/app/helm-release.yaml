@@ -68,3 +68,7 @@ spec:
         - hosts:
             - *api_host
           secretName: *api_host
+    resources:
+      requests:
+        memory: "3072Mi"
+        cpu: "20m"
