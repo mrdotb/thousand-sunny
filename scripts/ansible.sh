@@ -19,31 +19,36 @@ setup() {
 list() {
   ansible \
     --ask-become-pass \
-    all -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" --list-hosts
+    all -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" --list-hosts \
+    --extra-vars "$(sops --decrypt provision/ansible/vars.sops.env)"
 }
 
 ping() {
   ansible \
     --ask-become-pass \
-    all -i "${ANSIBLE_INVENTORY_DIR}/hosts.yaml" --one-line -m 'ping'
+    all -i "${ANSIBLE_INVENTORY_DIR}/hosts.yaml" --one-line -m 'ping' \
+    --extra-vars "$(sops --decrypt provision/ansible/vars.sops.env)"
 }
 
 kubernetes() {
   ansible-playbook \
     --ask-become-pass \
-    -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/kubernetes.yaml"
+    -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/kubernetes.yaml" \
+    --extra-vars "$(sops --decrypt provision/ansible/vars.sops.env)"
 }
 
 backup() {
   ansible-playbook \
     --ask-become-pass \
-    -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/backup.yaml"
+    -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/backup.yaml" \
+    --extra-vars "$(sops --decrypt provision/ansible/vars.sops.env)"
 }
 
 status() {
   ansible-playbook \
     --ask-become-pass \
-    -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/status.yaml"
+    -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/status.yaml" \
+    --extra-vars "$(sops --decrypt provision/ansible/vars.sops.env)"
 }
 
 case "$1" in

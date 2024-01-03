@@ -9,7 +9,7 @@ creation_rules:
     key_groups:
       - age:
           - age15s5tpgh6pwznwjah5w50vkdzhamc7lgmfv2s8mnyh6s3rg7g7fmsjav0fw
-  - path_regex: provision/ansible/.*\.sops\.yaml
+  - path_regex: provision/ansible/vars.sops.env
     key_groups:
       - age:
           - age15s5tpgh6pwznwjah5w50vkdzhamc7lgmfv2s8mnyh6s3rg7g7fmsjav0fw
