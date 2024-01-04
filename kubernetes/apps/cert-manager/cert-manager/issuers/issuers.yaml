@@ -10,19 +10,31 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging
     solvers:
-      - dns01:
+      # An empty 'selector' means that this solver matches all domains
+      - selector: {}
+        dns01:
           cloudflare:
             email: baptiste.chaleil@protonmail.com
             apiTokenSecretRef:
               name: cloudflare
               key: api-token
-        selector:
-          dnsZones:
-            - "${PUBLIC_DOMAIN}"
-            - "*.${PUBLIC_DOMAIN}"
-            - "leseditionsdeparis.com"
-            - "*.leseditionsdeparis.com"
-            - "tontontresors.co"
-            - "*.tontontresors.co"
-            - "leagueofreplays.co"
-            - "*.leagueofreplays.co"
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: baptiste.chaleil@protonmail.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+      # An empty 'selector' means that this solver matches all domains
+      - selector: {}
+        dns01:
+          cloudflare:
+            email: baptiste.chaleil@protonmail.com
+            apiTokenSecretRef:
+              name: cloudflare
+              key: api-token

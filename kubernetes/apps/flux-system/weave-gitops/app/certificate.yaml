@@ -7,7 +7,7 @@ metadata:
 spec:
   secretName: "gitops.${PUBLIC_DOMAIN}"
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - "gitops.${PUBLIC_DOMAIN}"

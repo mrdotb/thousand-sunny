@@ -7,7 +7,7 @@ metadata:
 spec:
   secretName: "s3.${PUBLIC_DOMAIN}"
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - "s3.${PUBLIC_DOMAIN}"
@@ -20,7 +20,7 @@ metadata:
 spec:
   secretName: "minio.${PUBLIC_DOMAIN}"
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - "minio.${PUBLIC_DOMAIN}"
@@ -28,12 +28,12 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "cdntest.tontontresors.com"
+  name: "cdn.tontontresors.com"
   namespace: storage
 spec:
-  secretName: "cdntest.tontontresors.com"
+  secretName: "cdn.tontontresors.com"
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - "cdntest.tontontresors.com"
+    - "cdn.tontontresors.com"

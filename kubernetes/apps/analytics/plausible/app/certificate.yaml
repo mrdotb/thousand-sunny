@@ -7,7 +7,7 @@ metadata:
 spec:
   secretName: "plausible.${PUBLIC_DOMAIN}"
   issuerRef:
-    name: letsencrypt-staging
+    name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
     - "plausible.${PUBLIC_DOMAIN}"

@@ -33,7 +33,7 @@ spec:
       enabled: true
       className: traefik
       hosts:
-        - host: &host "alpha.tontontresors.com"
+        - host: &host "tontontresors.com"
           paths:
             - path: /
               pathType: ImplementationSpecific

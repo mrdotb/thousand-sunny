@@ -19,7 +19,7 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: &host "cdntest.tontontresors.com"
+    - host: &host "cdn.tontontresors.com"
       http:
         paths:
           - path: /
