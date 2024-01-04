@@ -9,6 +9,7 @@ resources:
   - grafana.yaml
   - jetstack.yaml
   - kubernetes-dashboard.yaml
+  - meilisearch.yaml
   - metrics-server.yaml
   - mrdotb.yaml
   - prometheus-community.yaml
