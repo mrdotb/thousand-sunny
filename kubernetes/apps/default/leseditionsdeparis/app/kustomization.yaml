@@ -8,3 +8,4 @@ resources:
   - ./registry
   - ./helm-release.yaml
   - ./cron-job.yaml
+  - ./certificate.yaml
