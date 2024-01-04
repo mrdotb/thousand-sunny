@@ -1,0 +1,135 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app ttr
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: phoenix-app
+      version: 0.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: mrdotb
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    replicaCount: 0
+    secret:
+      existingSecret: ttr
+      create: false
+    ingress:
+      enabled: true
+      className: traefik
+      hosts:
+        - host: &host "alpha.tontontresors.com"
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - *host
+          secretName: *host
+    image:
+      repository: ghcr.io/mrdotb/ttr
+      pullPolicy: Always
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: "latest"
+    service:
+      type: ClusterIP
+      port: 4000
+    migration:
+      enabled: false
+      command: ["/app/bin/migrate"]
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "52m"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: ttr-postgres
+  namespace: analytics
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  primaryUpdateStrategy: unsupervised
+  storage:
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: local-path
+      resources:
+        requests:
+          storage: 10G
+  bootstrap:
+    initdb:
+      database: ttr
+      owner: ttr
+      secret:
+        name: ttr
+  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v1
+  postgresql:
+    parameters:
+      shared_buffers: 128MB
+  resources:
+    requests:
+      memory: "500Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+  monitoring:
+    enablePodMonitor: true
+  # backup:
+  #   retentionPolicy: 30d
+  #   barmanObjectStore:
+  #     data:
+  #       compression: bzip2
+  #     wal:
+  #       compression: bzip2
+  #       maxParallel: 8
+  #     destinationPath: s3://plausible/
+  #     endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+  #     serverName: &currentCluster postgres16-v1
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: plausible
+  #         key: access_key
+  #       secretAccessKey:
+  #         name: plausible
+  #         key: secret_key
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ttr-meilisearch
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: meilisearch
+      version: 0.3.0
+      sourceRef:
+        kind: HelmRepository
+        name: meilisearch
+        namespace: flux-system
+      interval: 15m
+  values:
+    auth:
+      existingMasterKeySecret: ttr

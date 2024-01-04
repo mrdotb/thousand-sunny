@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "alpha.tontontresors.com"
+  namespace: analytics
+spec:
+  secretName: "alpha.tontontresors.com"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "alpha.tontontresors.com"
