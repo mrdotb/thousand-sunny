@@ -6,5 +6,5 @@ resources:
   - ./secret.sops.yaml
   - ./helm-release.yaml
   - ./certificate.yaml
+  - ./pvc.yaml
   - ./registry
-  - ./pvc
