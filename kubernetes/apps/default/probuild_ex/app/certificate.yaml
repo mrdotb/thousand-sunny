@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "probuild.${PUBLIC_DOMAIN}"
+  namespace: analytics
+spec:
+  secretName: "probuild.${PUBLIC_DOMAIN}"
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - "probuild.${PUBLIC_DOMAIN}"
