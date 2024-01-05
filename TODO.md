@@ -1,8 +1,8 @@
 [x] postgres backups
-[] clickhouse backup
 [x] minio backups
+[x] move tontontresors to thousand sunny
+[x] use production letsencrypt
+[] clickhouse backup
 [] alert manager
-[] move tontontresors to thousand sunny
-[] use production letsencrypt
 [] setup proper resource for each project
 [] renovate
