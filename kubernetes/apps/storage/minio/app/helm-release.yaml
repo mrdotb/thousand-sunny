@@ -70,5 +70,7 @@ spec:
           secretName: *api_host
     resources:
       requests:
-        memory: "3072Mi"
-        cpu: "20m"
+        memory: "2860Mi"
+        cpu: "25m"
+      limits:
+        memory: "2860Mi"
