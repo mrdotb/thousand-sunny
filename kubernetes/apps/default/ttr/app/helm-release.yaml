@@ -63,8 +63,10 @@ spec:
           claimName: ttr
     resources:
       requests:
-        memory: "256Mi"
-        cpu: "52m"
+        memory: "595Mi"
+        cpu: "11m"
+      limits:
+        memory: "595Mi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -155,3 +157,9 @@ spec:
   values:
     auth:
       existingMasterKeySecret: ttr
+    resources:
+      requests:
+        memory: "100Mi"
+        cpu: "10m"
+      limits:
+        memory: "100Mi"
