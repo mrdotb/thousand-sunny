@@ -7,12 +7,14 @@ originRequest:
 ingress:
   - hostname: "*.${PUBLIC_DOMAIN}"
     service: https://traefik.kube-system.svc.cluster.local
-  - hostname: "leagueofreplays.co"
-    service: https://traefik.kube-system.svc.cluster.local
   - hostname: "leseditionsdeparis.com"
     service: https://traefik.kube-system.svc.cluster.local
   - hostname: "tontontresors.com"
     service: https://traefik.kube-system.svc.cluster.local
   - hostname: "*.tontontresors.com"
     service: https://traefik.kube-system.svc.cluster.local
+  - hostname: "leagueofreplays.co"
+    service: https://traefik.kube-system.svc.cluster.local
+  - hostname: "r.leagueofreplays.com"
+    service: http://traefik.kube-system.svc.cluster.local
   - service: http_status:404
