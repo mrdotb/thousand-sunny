@@ -65,8 +65,6 @@ spec:
       requests:
         memory: "595Mi"
         cpu: "11m"
-      limits:
-        memory: "595Mi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
