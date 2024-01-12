@@ -55,8 +55,10 @@ spec:
       secret.reloader.stakater.com/reload: *app
     resources:
       requests:
-        memory: "512Mi"
-        cpu: "20m"
+        memory: "375Mi"
+        cpu: "17m"
+      limits:
+        memory: "375Mi"
 
 ---
 apiVersion: postgresql.cnpg.io/v1
@@ -165,5 +167,7 @@ spec:
       secret.reloader.stakater.com/reload: plausible
     resources:
       requests:
-        memory: "3072Mi"
-        cpu: "100m"
+        memory: "2961Mi"
+        cpu: "86m"
+      limits:
+        memory: "2961Mi"
