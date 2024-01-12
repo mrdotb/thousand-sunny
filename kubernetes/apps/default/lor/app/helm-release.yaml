@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: phoenix-app
-      version: 0.1.1
+      version: 0.2.5
       sourceRef:
         kind: HelmRepository
         name: mrdotb
@@ -25,10 +25,26 @@ spec:
     remediation:
       retries: 3
   values:
+    app: lor
     replicaCount: 1
     secret:
       existingSecret: lor
       create: false
+    labels:
+      app: lor
+    extraEnv:
+      - name: PHX_SERVER
+        value: "true"
+      - name: K8_NODE_BASENAME
+        value: "lor"
+      - name: DDRAGON_CACHE
+        value: "true"
+      - name: OBAN_QUEUE
+        value: "true"
+      - name: SCHEDULER
+        value: "true"
+      - name: PRO_SCHEDULER
+        value: "true"
     ingress:
       enabled: true
       className: traefik
@@ -45,12 +61,74 @@ spec:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "v0.1.0"
+      tag: "v0.5.1"
     service:
       type: ClusterIP
       port: 4000
+      healthcheck: /
     migration:
       enabled: true
+      command: ["/app/bin/migrate"]
+    resources:
+      requests:
+        memory: "1000Mi"
+        cpu: "100m"
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app lor-spectator
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: phoenix-app
+      version: 0.2.5
+      sourceRef:
+        kind: HelmRepository
+        name: mrdotb
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    app: lor
+    replicaCount: 1
+    secret:
+      existingSecret: lor
+      create: false
+    extraEnv:
+      - name: SPECTATOR_SERVER
+        value: "true"
+      - name: K8_NODE_BASENAME
+        value: "lor"
+    ingress:
+      enabled: true
+      className: traefik
+      hosts:
+        - host: &host "r.leagueofreplays.co"
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+    image:
+      repository: ghcr.io/mrdotb/leagueofreplays
+      pullPolicy: Always
+      # Overrides the image tag whose default is the chart appVersion.
+      tag: "v0.5.1"
+    service:
+      type: ClusterIP
+      port: 3000
+      healthcheck: /observer-mode/rest/consumer/version
+    migration:
+      enabled: false
       command: ["/app/bin/migrate"]
     resources:
       requests:

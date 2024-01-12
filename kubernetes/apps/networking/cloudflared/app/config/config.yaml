@@ -15,6 +15,8 @@ ingress:
     service: https://traefik.kube-system.svc.cluster.local
   - hostname: "leagueofreplays.co"
     service: https://traefik.kube-system.svc.cluster.local
-  - hostname: "r.leagueofreplays.com"
+  - hostname: "r.leagueofreplays.co"
+    service: http://traefik.kube-system.svc.cluster.local
+  - hostname: "s3.mrdotb.com"
     service: http://traefik.kube-system.svc.cluster.local
   - service: http_status:404
