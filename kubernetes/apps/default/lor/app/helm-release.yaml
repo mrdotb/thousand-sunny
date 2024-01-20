@@ -60,8 +60,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: "v0.5.1"
+      tag: "v0.8.0"
     service:
       type: ClusterIP
       port: 4000
@@ -121,8 +120,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: "v0.5.1"
+      tag: "v0.8.0"
     service:
       type: ClusterIP
       port: 3000
