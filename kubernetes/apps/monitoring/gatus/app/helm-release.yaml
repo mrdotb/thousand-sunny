@@ -33,6 +33,14 @@ spec:
           url: https://mrdotb.com
           conditions:
             - '[STATUS] == 200'
+        - name: Leagueofreplays
+          url: https://leagueofreplays.co
+          conditions:
+            - '[STATUS] == 200'
+        - name: Leseditionsdeparis
+          url: https://leseditionsdeparis.com
+          conditions:
+            - '[STATUS] == 200'
         - name: Tontontresors
           url: https://tontontresors.com/hermes-scarves
           conditions:
@@ -41,10 +49,7 @@ spec:
           url: https://probuild.mrdotb.com
           conditions:
             - '[STATUS] == 200'
-        - name: Leseditionsdeparis
-          url: https://leseditionsdeparis.com
-          conditions:
-            - '[STATUS] == 200'
+
     ingress:
       enabled: true
       ingressClassName: "traefik"
