@@ -44,8 +44,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/ttr
       pullPolicy: Always
-      # Overrides the image tag whose default is the chart appVersion.
-      tag: "latest"
+      tag: "v0.2.0"
     imagePullSecrets:
       - name: ttr-registry
     service:
