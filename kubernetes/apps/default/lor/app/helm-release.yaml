@@ -43,7 +43,7 @@ spec:
         value: "true"
       - name: PRO_SCHEDULER
         value: "true"
-      - name: SCHEDULER_REGIONS
+      - name: SCHEDULER_PLATFORMS
         value: "kr"
       - name: QUEUE_PRO_PLATFORMS
         value: "kr"
