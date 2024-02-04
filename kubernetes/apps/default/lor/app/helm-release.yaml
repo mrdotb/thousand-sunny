@@ -39,12 +39,14 @@ spec:
         value: "lor"
       - name: DDRAGON_CACHE
         value: "true"
-      - name: OBAN_QUEUE
-        value: "true"
       - name: SCHEDULER
         value: "true"
       - name: PRO_SCHEDULER
         value: "true"
+      - name: SCHEDULER_REGIONS
+        value: "kr"
+      - name: QUEUE_PRO_PLATFORMS
+        value: "kr"
     ingress:
       enabled: true
       className: traefik
@@ -60,7 +62,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.12.2"
+      tag: "v0.13.0"
     service:
       type: ClusterIP
       port: 4000
@@ -109,6 +111,8 @@ spec:
         value: "true"
       - name: K8_NODE_BASENAME
         value: "lor"
+      - name: QUEUE_COUNT
+        value: "0"
     ingress:
       enabled: true
       className: traefik
@@ -120,7 +124,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.12.2"
+      tag: "v0.13.0"
     service:
       type: ClusterIP
       port: 3000
