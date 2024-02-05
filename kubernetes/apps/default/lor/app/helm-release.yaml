@@ -74,8 +74,10 @@ spec:
       command: ["/app/bin/migrate"]
     resources:
       requests:
-        memory: "1000Mi"
-        cpu: "100m"
+        memory: "793Mi"
+        cpu: "126m"
+      limits:
+        memory: "793Mi"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
@@ -134,8 +136,10 @@ spec:
       command: ["/app/bin/migrate"]
     resources:
       requests:
-        memory: "1000Mi"
-        cpu: "20m"
+        memory: "793Mi"
+        cpu: "10m"
+      limits:
+        memory: "205Mi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster

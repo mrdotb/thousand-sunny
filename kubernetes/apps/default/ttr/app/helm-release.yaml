@@ -62,8 +62,10 @@ spec:
           claimName: ttr
     resources:
       requests:
-        memory: "595Mi"
+        memory: "521Mi"
         cpu: "11m"
+      limits:
+        memory: "521Mi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -104,7 +106,7 @@ spec:
   monitoring:
     enablePodMonitor: true
   backup:
-    retentionPolicy: 30d
+    retentionPolicy: 3d
     barmanObjectStore:
       data:
         compression: bzip2
