@@ -47,6 +47,8 @@ spec:
         value: "kr"
       - name: QUEUE_PRO_PLATFORMS
         value: "kr"
+      - name: OBAN_QUEUES
+        value: "default,10"
     ingress:
       enabled: true
       className: traefik
@@ -62,7 +64,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.13.1"
+      tag: "v0.13.2"
     service:
       type: ClusterIP
       port: 4000
@@ -111,8 +113,6 @@ spec:
         value: "true"
       - name: K8_NODE_BASENAME
         value: "lor"
-      - name: QUEUE_COUNT
-        value: "0"
     ingress:
       enabled: true
       className: traefik
@@ -124,7 +124,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.13.1"
+      tag: "v0.13.2"
     service:
       type: ClusterIP
       port: 3000
