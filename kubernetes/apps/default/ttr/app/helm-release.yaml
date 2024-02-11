@@ -44,7 +44,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/ttr
       pullPolicy: Always
-      tag: "v0.3.0"
+      tag: "v0.3.1"
     imagePullSecrets:
       - name: ttr-registry
     service:
