@@ -7,3 +7,4 @@ resources:
   - ./lor/ks.yaml
   - ./probuild_ex/ks.yaml
   - ./ttr/ks.yaml
+  - ./scarfsage/ks.yaml
