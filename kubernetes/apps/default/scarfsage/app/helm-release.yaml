@@ -1,0 +1,164 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app scarfsage
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: phoenix-app
+      version: 0.1.1
+      sourceRef:
+        kind: HelmRepository
+        name: mrdotb
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    replicaCount: 0
+    secret:
+      existingSecret: scarfsage
+      create: false
+    ingress:
+      enabled: true
+      className: traefik
+      hosts:
+        - host: &host "scarfsage.com"
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - *host
+          secretName: *host
+    image:
+      repository: ghcr.io/mrdotb/scarfsage
+      pullPolicy: Always
+      tag: "v0.1.0"
+    imagePullSecrets:
+      - name: scarfsage-registry
+    service:
+      type: ClusterIP
+      port: 4000
+    migration:
+      enabled: false
+      command: ["/app/bin/migrate"]
+    volumeMounts:
+      - name: scarfsage-dir
+        mountPath: /opt/archive_org
+    volumes:
+      - name: scarfsage-dir
+        persistentVolumeClaim:
+          claimName: scarfsage
+    resources:
+      requests:
+        memory: "521Mi"
+        cpu: "11m"
+      limits:
+        memory: "521Mi"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: scarfsage-postgres
+  namespace: default
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  primaryUpdateStrategy: unsupervised
+  storage:
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: local-path
+      resources:
+        requests:
+          storage: 10G
+  bootstrap:
+    initdb:
+      database: scarfsage
+      owner: scarfsage
+      secret:
+        name: scarfsage
+  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v1
+  postgresql:
+    parameters:
+      shared_buffers: 128MB
+  resources:
+    requests:
+      memory: "500Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 3d
+    barmanObjectStore:
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://scarfsage-backup/
+      endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+      serverName: &currentCluster postgres16-v1
+      s3Credentials:
+        accessKeyId:
+          name: scarfsage
+          key: access_key
+        secretAccessKey:
+          name: scarfsage
+          key: secret_key
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: scarfsage-postgres-scheduled-backup
+  namespace: default
+spec:
+  immediate: true
+  schedule: "@weekly"
+  cluster:
+    name: scarfsage-postgres
+  target: primary
+  method: barmanObjectStore
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: scarfsage-meilisearch
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: meilisearch
+      version: 0.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: meilisearch
+        namespace: flux-system
+      interval: 15m
+  values:
+    auth:
+      existingMasterKeySecret: scarfsage
+    resources:
+      requests:
+        memory: "100Mi"
+        cpu: "10m"
+      limits:
+        memory: "100Mi"
