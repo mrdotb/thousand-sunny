@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: phoenix-app
-      version: 0.1.1
+      version: 0.2.5
       sourceRef:
         kind: HelmRepository
         name: mrdotb
@@ -28,6 +28,8 @@ spec:
     replicaCount: 1
     secret:
       existingSecret: probuild-ex
+      create: false
+    rbac:
       create: false
     ingress:
       enabled: true
