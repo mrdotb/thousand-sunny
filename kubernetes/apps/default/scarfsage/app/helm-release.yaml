@@ -52,6 +52,7 @@ spec:
     service:
       type: ClusterIP
       port: 4000
+      healthcheck: "/up"
     migration:
       enabled: false
       command: ["/app/bin/migrate"]
