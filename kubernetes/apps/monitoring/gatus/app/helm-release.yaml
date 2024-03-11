@@ -41,10 +41,6 @@ spec:
           url: https://leseditionsdeparis.com
           conditions:
             - '[STATUS] == 200'
-        - name: Tontontresors
-          url: https://tontontresors.com/hermes-scarves
-          conditions:
-            - '[STATUS] == 200'
         - name: ScarfSage
           url: https://scarfsage.com/hermes-scarves
           conditions:
