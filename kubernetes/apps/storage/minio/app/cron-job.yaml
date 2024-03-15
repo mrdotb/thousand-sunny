@@ -33,9 +33,8 @@ spec:
                   mc alias set minio $MINIO_HOST $MINIO_ACCESS_KEY $MINIO_SECRET_KEY &&
                   mc mirror minio/leseditionsdeparis /mnt/backup/minio/leseditionsdeparis &&
                   mc mirror minio/probuild-ex /mnt/backup/minio/probuild-ex &&
-                  mc mirror minio/plausible /mnt/backup/minio/plausible &&
-                  mc mirror minio/ttr /mnt/backup/minio/ttr &&
-                  mc mirror minio/ttr-backup /mnt/backup/minio/ttr-backup
+                  mc mirror minio/scarfsage-backup /mnt/backup/minio/scarfsage-backup &&
+                  mc mirror minio/ttr /mnt/backup/minio/ttr
 
               volumeMounts:
                 - name: backup-vol
