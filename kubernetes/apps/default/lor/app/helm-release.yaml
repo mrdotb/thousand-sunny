@@ -64,7 +64,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.17.0"
+      tag: "v0.17.3"
     service:
       type: ClusterIP
       port: 4000
@@ -126,7 +126,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.17.0"
+      tag: "v0.17.3"
     service:
       type: ClusterIP
       port: 3000
