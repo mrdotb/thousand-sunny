@@ -23,4 +23,8 @@ ingress:
     service: http://traefik.kube-system.svc.cluster.local
   - hostname: "*.scarfsage.com"
     service: http://traefik.kube-system.svc.cluster.local
+  - hostname: "dotb.io"
+    service: https://traefik.kube-system.svc.cluster.local
+  - hostname: "*.dotb.io"
+    service: https://traefik.kube-system.svc.cluster.local
   - service: http_status:404
