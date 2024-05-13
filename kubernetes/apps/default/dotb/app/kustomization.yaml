@@ -4,6 +4,6 @@ kind: Kustomization
 namespace: default
 resources:
   - ./secret.sops.yaml
-  - ./registry.yaml
+  - ./registry
   - ./helm-release.yaml
   - ./certificate.yaml
