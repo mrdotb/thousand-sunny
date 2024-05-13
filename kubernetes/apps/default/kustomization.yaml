@@ -8,3 +8,4 @@ resources:
   - ./probuild_ex/ks.yaml
   - ./ttr/ks.yaml
   - ./scarfsage/ks.yaml
+  - ./dotb/ks.yaml

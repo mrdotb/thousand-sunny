@@ -1,0 +1,138 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app dotb
+  namespace: default
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: phoenix-app
+      version: 0.2.5
+      sourceRef:
+        kind: HelmRepository
+        name: mrdotb
+        namespace: flux-system
+      interval: 15m
+  maxHistory: 2
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  values:
+    app: dotb
+    replicaCount: 1
+    secret:
+      existingSecret: dotb
+      create: false
+    labels:
+      app: dotb
+    extraEnv:
+      - name: PHX_SERVER
+        value: "true"
+      - name: K8_NODE_BASENAME
+        value: "dotb"
+    ingress:
+      enabled: true
+      className: traefik
+      hosts:
+        - host: &host "dotb.io"
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - *host
+          secretName: *host
+    image:
+      repository: ghcr.io/mrdotb/dotb
+      pullPolicy: Always
+      tag: "v0.1.0"
+    service:
+      type: ClusterIP
+      port: 4000
+      healthcheck: /
+    migration:
+      enabled: true
+      command: ["/app/bin/migrate"]
+    resources:
+      requests:
+        memory: "500Mi"
+        cpu: "100m"
+      limits:
+        memory: "500Mi"
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: dotb-postgres
+  namespace: default
+spec:
+  instances: 1
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  primaryUpdateStrategy: unsupervised
+  storage:
+    pvcTemplate:
+      accessModes:
+        - ReadWriteOnce
+      storageClassName: local-path
+      resources:
+        requests:
+          storage: 10G
+  bootstrap:
+    initdb:
+      database: dotb
+      owner: dotb
+      secret:
+        name: dotb
+  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   recovery:
+  #     source: &previousCluster postgres16-v1
+  postgresql:
+    parameters:
+      shared_buffers: 128MB
+  resources:
+    requests:
+      memory: "500Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://dotb-backup/
+      endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+      serverName: &currentCluster postgres16-v1
+      s3Credentials:
+        accessKeyId:
+          name: dotb
+          key: access_key
+        secretAccessKey:
+          name: dotb
+          key: secret_key
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: dotb-postgres-scheduled-backup
+  namespace: default
+spec:
+  immediate: true
+  schedule: "@weekly"
+  cluster:
+    name: dotb-postgres
+  target: primary
+  method: barmanObjectStore
