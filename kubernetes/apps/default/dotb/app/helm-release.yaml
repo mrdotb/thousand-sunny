@@ -53,6 +53,8 @@ spec:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
       tag: "v0.1.0"
+    imagePullSecrets:
+      - name: dotb-registry
     service:
       type: ClusterIP
       port: 4000
