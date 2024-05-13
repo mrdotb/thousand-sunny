@@ -34,7 +34,9 @@ spec:
                   mc mirror minio/leseditionsdeparis /mnt/backup/minio/leseditionsdeparis &&
                   mc mirror minio/probuild-ex /mnt/backup/minio/probuild-ex &&
                   mc mirror minio/scarfsage-backup /mnt/backup/minio/scarfsage-backup &&
-                  mc mirror --overwrite minio/ttr /mnt/backup/minio/ttr
+                  mc mirror --overwrite minio/ttr /mnt/backup/minio/ttr &&
+                  mc mirror minio/dotb-backup /mnt/backup/minio/dotb-backup &&
+                  mc mirror --overwrite minio/dotb /mnt/backup/minio/dotb
 
               volumeMounts:
                 - name: backup-vol

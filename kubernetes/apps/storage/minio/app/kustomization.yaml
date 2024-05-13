@@ -9,3 +9,4 @@ resources:
   - ./cron-job.yaml
   - ./ttr-ingress.yaml
   - ./scarfsage-ingress.yaml
+  - ./dotb-ingress.yaml
