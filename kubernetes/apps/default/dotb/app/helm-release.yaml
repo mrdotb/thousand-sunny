@@ -52,13 +52,13 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.7.0"
+      tag: "v0.8.0"
     imagePullSecrets:
       - name: dotb-registry
     service:
       type: ClusterIP
       port: 4000
-      healthcheck: /
+      healthcheck: /up
     migration:
       enabled: true
       command: ["/app/bin/migrate"]
