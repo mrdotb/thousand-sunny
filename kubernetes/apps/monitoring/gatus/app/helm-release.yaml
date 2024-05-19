@@ -29,10 +29,6 @@ spec:
         type: sqlite
         path: /data/data.db
       endpoints:
-        - name: Blog
-          url: https://mrdotb.com
-          conditions:
-            - '[STATUS] == 200'
         - name: Leagueofreplays
           url: https://leagueofreplays.co
           conditions:
@@ -45,8 +41,8 @@ spec:
           url: https://scarfsage.com/hermes-scarves
           conditions:
             - '[STATUS] == 200'
-        - name: ProbuildEx
-          url: https://probuild.mrdotb.com
+        - name: Dotb
+          url: https://dotb.io/up
           conditions:
             - '[STATUS] == 200'
 
