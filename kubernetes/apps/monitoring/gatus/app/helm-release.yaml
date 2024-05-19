@@ -29,22 +29,22 @@ spec:
         type: sqlite
         path: /data/data.db
       endpoints:
-        - name: Leagueofreplays
-          url: https://leagueofreplays.co
-          conditions:
-            - '[STATUS] == 200'
-        - name: Leseditionsdeparis
-          url: https://leseditionsdeparis.com
-          conditions:
-            - '[STATUS] == 200'
-        - name: ScarfSage
-          url: https://scarfsage.com/hermes-scarves
-          conditions:
-            - '[STATUS] == 200'
-        - name: Dotb
-          url: https://dotb.io/up
-          conditions:
-            - '[STATUS] == 200'
+        # - name: Leagueofreplays
+        #   url: https://leagueofreplays.co
+        #   conditions:
+        #     - '[STATUS] == 200'
+        # - name: Leseditionsdeparis
+        #   url: https://leseditionsdeparis.com
+        #   conditions:
+        #     - '[STATUS] == 200'
+        # - name: ScarfSage
+        #   url: https://scarfsage.com/hermes-scarves
+        #   conditions:
+        #     - '[STATUS] == 200'
+        # - name: Dotb
+        #   url: https://dotb.io/up
+        #   conditions:
+        #     - '[STATUS] == 200'
 
     ingress:
       enabled: true
