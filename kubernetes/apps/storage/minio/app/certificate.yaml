@@ -37,3 +37,29 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - "cdn.tontontresors.com"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "cdn.scarfsage.com"
+  namespace: storage
+spec:
+  secretName: "cdn.scarfsage.com"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "cdn.scarfsage.com"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "cdn.dotb.io"
+  namespace: storage
+spec:
+  secretName: "cdn.dotb.io"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "cdn.dotb.io"
