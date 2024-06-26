@@ -44,9 +44,9 @@ spec:
       - name: PRO_SCHEDULER
         value: "true"
       - name: SCHEDULER_PLATFORMS
-        value: "kr"
+        value: "euw1"
       - name: QUEUE_PRO_PLATFORMS
-        value: "kr"
+        value: "euw1"
       - name: OBAN_QUEUES
         value: "default,10"
     ingress:
@@ -64,7 +64,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.20.0"
+      tag: "v0.22.0"
     service:
       type: ClusterIP
       port: 4000
@@ -126,7 +126,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.20.0"
+      tag: "v0.22.0"
     service:
       type: ClusterIP
       port: 3000
