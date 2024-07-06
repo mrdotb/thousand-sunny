@@ -126,7 +126,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.23.2"
+      tag: "v0.24.0"
     service:
       type: ClusterIP
       port: 3000
