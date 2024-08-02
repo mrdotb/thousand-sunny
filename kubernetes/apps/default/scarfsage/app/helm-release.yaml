@@ -46,7 +46,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/scarfsage
       pullPolicy: Always
-      tag: "v0.19.2"
+      tag: "v0.19.3"
     imagePullSecrets:
       - name: scarfsage-registry
     service:
