@@ -100,11 +100,11 @@ spec:
   #     source: &previousCluster postgres16-v1
   postgresql:
     parameters:
-      shared_buffers: 128MB
+      shared_buffers: "256MB"
   resources:
     requests:
-      memory: "500Mi"
-      cpu: "250m"
+      memory: "1024Mi"
+      cpu: "500m"
     limits:
       memory: "1Gi"
   monitoring:
