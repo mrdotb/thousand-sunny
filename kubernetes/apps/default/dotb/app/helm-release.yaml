@@ -37,8 +37,6 @@ spec:
         value: "true"
       - name: K8_NODE_BASENAME
         value: "dotb"
-      - name: OBAN_QUEUES
-        value: "default,10"
     ingress:
       enabled: true
       className: traefik
@@ -54,7 +52,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.36.4"
+      tag: "v0.36.5"
     imagePullSecrets:
       - name: dotb-registry
     service:
