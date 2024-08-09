@@ -37,6 +37,8 @@ spec:
         value: "true"
       - name: K8_NODE_BASENAME
         value: "dotb"
+      - name: LIBCLUSTER
+        value: "true"
     ingress:
       enabled: true
       className: traefik
@@ -52,7 +54,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.36.6"
+      tag: "v0.36.7"
     imagePullSecrets:
       - name: dotb-registry
     service:
