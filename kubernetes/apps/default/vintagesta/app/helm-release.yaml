@@ -20,11 +20,19 @@ spec:
     existingSecret: vintagesta
     wordpressScheme: https
     wordpressSkipInstall: true
+    wordpressExtraConfigContent: |
+      $_SERVER["HTTPS"] = "on";
     ingress:
       enabled: true
       ingressClassName: traefik
       hostname: vintagesta.com
       tls: true
+    resources:
+      requests:
+        memory: "300mo"
+        cpu: "50m"
+      limits:
+        memory: "300mo"
     mariadb:
       enabled: true
       architecture: standalone
@@ -32,3 +40,9 @@ spec:
         database: vintagesta
         username: vintagesta
         existingSecret: vintagesta
+      resources:
+        requests:
+          memory: "200mo"
+          cpu: "50m"
+        limits:
+          memory: "50mo"
