@@ -29,10 +29,10 @@ spec:
       tls: true
     resources:
       requests:
-        memory: "300Mi"
-        cpu: "50m"
+        memory: "1024Mi"
+        cpu: "500m"
       limits:
-        memory: "300Mi"
+        memory: "1024Mi"
     mariadb:
       enabled: true
       architecture: standalone
@@ -40,9 +40,3 @@ spec:
         database: tontontresors
         username: tontontresors
         existingSecret: tontontresors
-      resources:
-        requests:
-          memory: "1024Mi"
-          cpu: "250m"
-        limits:
-          memory: "1024Mi"
