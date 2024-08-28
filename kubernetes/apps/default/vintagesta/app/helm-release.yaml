@@ -29,10 +29,10 @@ spec:
       tls: true
     resources:
       requests:
-        memory: "300mo"
+        memory: "300Mi"
         cpu: "50m"
       limits:
-        memory: "300mo"
+        memory: "300Mi"
     mariadb:
       enabled: true
       architecture: standalone
@@ -42,7 +42,7 @@ spec:
         existingSecret: vintagesta
       resources:
         requests:
-          memory: "200mo"
+          memory: "200Mi"
           cpu: "50m"
         limits:
-          memory: "50mo"
+          memory: "200Mi"

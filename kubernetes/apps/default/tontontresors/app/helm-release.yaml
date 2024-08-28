@@ -19,20 +19,20 @@ spec:
     replicaCount: 1
     existingSecret: tontontresors
     wordpressScheme: https
-    wordpressSkipInstall: true
+    wordpressSkipInstall: false
     wordpressExtraConfigContent: |
       $_SERVER["HTTPS"] = "on";
     ingress:
       enabled: true
       ingressClassName: traefik
-      hostname: tontontresors.com
+      hostname: staging.tontontresors.com
       tls: true
     resources:
       requests:
-        memory: "300mo"
+        memory: "300Mi"
         cpu: "50m"
       limits:
-        memory: "300mo"
+        memory: "300Mi"
     mariadb:
       enabled: true
       architecture: standalone
@@ -42,7 +42,7 @@ spec:
         existingSecret: tontontresors
       resources:
         requests:
-          memory: "200mo"
-          cpu: "50m"
+          memory: "1024Mi"
+          cpu: "250m"
         limits:
-          memory: "50mo"
+          memory: "1024Mi"
