@@ -44,9 +44,9 @@ spec:
       - name: PRO_SCHEDULER
         value: "true"
       - name: SCHEDULER_PLATFORMS
-        value: "euw1"
+        value: "euw1,kr"
       - name: QUEUE_PRO_PLATFORMS
-        value: "euw1"
+        value: "euw1,kr"
       - name: OBAN_QUEUES
         value: "default,10"
     ingress:
