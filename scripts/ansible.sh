@@ -13,7 +13,8 @@ init() {
 }
 
 setup() {
-  ansible-playbook -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/setup.yaml"
+  ansible-playbook -i "$ANSIBLE_INVENTORY_DIR/hosts.yaml" "$ANSIBLE_PLAYBOOK_DIR/setup.yaml" \
+    --extra-vars "$(sops --decrypt provision/ansible/vars.sops.env)"
 }
 
 list() {
