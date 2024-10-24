@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: kubernetes-dashboard
-      version: 7.0.0-alpha0
+      version: 7.9.0
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
@@ -40,14 +40,14 @@ spec:
         env:
           - name: TZ
             value: "${TIMEZONE}"
-    app:
-      ingress:
-        enabled: true
-        ingressClassName: traefik
-        annotations:
-          forecastle.stakater.com/icon: "kubernetes"
-        hosts:
-          - &host "k8s.${PUBLIC_DOMAIN}"
-        secretName: *host
-        issuer:
-          scope: disabled
+    # app:
+    #   ingress:
+    #     enabled: true
+    #     ingressClassName: traefik
+    #     annotations:
+    #       forecastle.stakater.com/icon: "kubernetes"
+    #     hosts:
+    #       - &host "k8s.${PUBLIC_DOMAIN}"
+    #     secretName: *host
+    #     issuer:
+    #       scope: disabled
