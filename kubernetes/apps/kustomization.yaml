@@ -4,12 +4,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - analytics
-  - cert-manager
-  - database
-  - default
+  # - analytics
+  # - cert-manager
+  # - database
+  # - default
   - flux-system
-  - kube-system
-  - monitoring
-  - networking
-  - storage
+  # - kube-system
+  # - monitoring
+  # - networking
+  # - storage
