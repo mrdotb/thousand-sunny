@@ -1,5 +1,5 @@
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: weave-gitops
@@ -30,9 +30,9 @@ spec:
       create: true
       createSecret: false
       username: admin
-    ingress:
-      enabled: true
-      className: traefik
+    # ingress:
+      # enabled: true
+      # className: traefik
       # hosts:
       #   - host: &host "gitops.${PUBLIC_DOMAIN}"
       #     paths:
