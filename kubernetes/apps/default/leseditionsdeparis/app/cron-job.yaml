@@ -13,20 +13,29 @@ spec:
           restartPolicy: OnFailure
           containers:
             - name: leseditionsdeparis-backup
-              image: eeacms/rsync:2.4
+              image: minio/mc:RELEASE.2024-10-08T09-37-26Z.fips
               command: ["/bin/sh", "-c"]
               args:
                 - |
-                  rsync -av /srv/leseditionsdeparis /mnt/backup/leseditionsdeparis/
+                  mc alias set minio $URL $ACCESS_KEY $SECRET_KEY
+                  mc cp -r /srv/leseditionsdeparis/uploads minio/edp-backup
+              env:
+                - name: URL
+                  value: ${LOCAL_S3}
+                - name: ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: leseditionsdeparis
+                      key: access_key
+                - name: SECRET_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: leseditionsdeparis
+                      key: secret_key
               volumeMounts:
                 - name: edp-images
                   mountPath: /srv/leseditionsdeparis
-                - name: backup-vol
-                  mountPath: /mnt/backup
           volumes:
             - name: edp-images
               persistentVolumeClaim:
                 claimName: leseditionsdeparis
-            - name: backup-vol
-              hostPath:
-                path: /mnt/backup

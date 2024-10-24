@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: kubernetes-dashboard
-      version: 7.0.0-alpha0
+      version: 7.9.0
       sourceRef:
         kind: HelmRepository
         name: kubernetes-dashboard
@@ -47,7 +47,9 @@ spec:
         annotations:
           forecastle.stakater.com/icon: "kubernetes"
         hosts:
+          - localhost
           - &host "k8s.${PUBLIC_DOMAIN}"
-        secretName: *host
+        tls:
+          secretName: *host
         issuer:
           scope: disabled

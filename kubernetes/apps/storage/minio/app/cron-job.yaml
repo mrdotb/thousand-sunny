@@ -1,47 +1,47 @@
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: minio-cron-job
-  namespace: storage
-spec:
-  schedule: "@weekly"
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          restartPolicy: OnFailure
-          containers:
-            - name: minio-backup
-              image: minio/mc
-              env:
-                - name: MINIO_HOST
-                  value: "https://s3.${PUBLIC_DOMAIN}"
-                - name: MINIO_ACCESS_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: minio
-                      key: access_key
-                - name: MINIO_SECRET_KEY
-                  valueFrom:
-                    secretKeyRef:
-                      name: minio
-                      key: secret_key
-              command: ["/bin/sh", "-c"]
-              args:
-                - |
-                  mc alias set minio $MINIO_HOST $MINIO_ACCESS_KEY $MINIO_SECRET_KEY &&
-                  mc mirror minio/leseditionsdeparis /mnt/backup/minio/leseditionsdeparis &&
-                  mc mirror minio/probuild-ex /mnt/backup/minio/probuild-ex &&
-                  mc mirror minio/scarfsage-backup /mnt/backup/minio/scarfsage-backup &&
-                  mc mirror --overwrite minio/ttr /mnt/backup/minio/ttr &&
-                  mc mirror minio/dotb-backup /mnt/backup/minio/dotb-backup &&
-                  mc mirror --overwrite minio/dotb /mnt/backup/minio/dotb
+# ---
+# apiVersion: batch/v1
+# kind: CronJob
+# metadata:
+#   name: minio-cron-job
+#   namespace: storage
+# spec:
+#   schedule: "@weekly"
+#   jobTemplate:
+#     spec:
+#       template:
+#         spec:
+#           restartPolicy: OnFailure
+#           containers:
+#             - name: minio-backup
+#               image: minio/mc
+#               env:
+#                 - name: MINIO_HOST
+#                   value: "https://s3.${PUBLIC_DOMAIN}"
+#                 - name: MINIO_ACCESS_KEY
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: minio
+#                       key: access_key
+#                 - name: MINIO_SECRET_KEY
+#                   valueFrom:
+#                     secretKeyRef:
+#                       name: minio
+#                       key: secret_key
+#               command: ["/bin/sh", "-c"]
+#               args:
+#                 - |
+#                   mc alias set minio $MINIO_HOST $MINIO_ACCESS_KEY $MINIO_SECRET_KEY &&
+#                   mc mirror minio/leseditionsdeparis /mnt/backup/minio/leseditionsdeparis &&
+#                   mc mirror minio/probuild-ex /mnt/backup/minio/probuild-ex &&
+#                   mc mirror minio/scarfsage-backup /mnt/backup/minio/scarfsage-backup &&
+#                   mc mirror --overwrite minio/ttr /mnt/backup/minio/ttr &&
+#                   mc mirror minio/dotb-backup /mnt/backup/minio/dotb-backup &&
+#                   mc mirror --overwrite minio/dotb /mnt/backup/minio/dotb
 
-              volumeMounts:
-                - name: backup-vol
-                  mountPath: /mnt/backup
-          volumes:
-            - name: backup-vol
-              hostPath:
-                path: /mnt/backup
+#               volumeMounts:
+#                 - name: backup-vol
+#                   mountPath: /mnt/backup
+#           volumes:
+#             - name: backup-vol
+#               hostPath:
+#                 path: /mnt/backup

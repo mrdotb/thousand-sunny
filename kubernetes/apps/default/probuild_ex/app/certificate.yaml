@@ -2,12 +2,12 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "probuild.${PUBLIC_DOMAIN}"
+  name: "probuild.mrdotb.com"
   namespace: default
 spec:
-  secretName: "probuild.${PUBLIC_DOMAIN}"
+  secretName: "probuild.mrdotb.com"
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - "probuild.${PUBLIC_DOMAIN}"
+    - "probuild.mrdotb.com"

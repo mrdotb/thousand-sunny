@@ -6,7 +6,7 @@ resources:
   - ./secret.sops.yaml
   - ./certificate.yaml
   - ./helm-release.yaml
-  - ./cron-job.yaml
-  - ./ttr-ingress.yaml
-  - ./scarfsage-ingress.yaml
-  - ./dotb-ingress.yaml
+  # - ./cron-job.yaml
+  # - ./ttr-ingress.yaml
+  # - ./scarfsage-ingress.yaml
+  # - ./dotb-ingress.yaml

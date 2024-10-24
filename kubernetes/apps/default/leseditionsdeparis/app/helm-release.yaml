@@ -75,7 +75,7 @@ metadata:
   namespace: default
 spec:
   instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4-45
   primaryUpdateStrategy: unsupervised
   storage:
     pvcTemplate:
@@ -85,16 +85,34 @@ spec:
       resources:
         requests:
           storage: 10G
-  bootstrap:
-    initdb:
-      database: edp
-      owner: edp
-      secret:
-        name: leseditionsdeparis
+  # bootstrap:
+    # initdb:
+    #   database: edp
+    #   owner: edp
+    #   secret:
+    #     name: leseditionsdeparis
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   # bootstrap:
   #   recovery:
-  #     source: &previousCluster postgres16-v1
+  #     source: &previousCluster backup
+  # externalClusters:
+  #   - name: backup
+  #     barmanObjectStore:
+  #       data:
+  #         compression: bzip2
+  #       wal:
+  #         compression: bzip2
+  #         maxParallel: 8
+  #       destinationPath: s3://leseditionsdeparis/
+  #       endpointURL: "https://s3.mrdotb.com"
+  #       serverName: postgres16-v1
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: leseditionsdeparis
+  #           key: backup_access_key
+  #         secretAccessKey:
+  #           name: leseditionsdeparis
+  #           key: backup_secret_key
   postgresql:
     parameters:
       shared_buffers: 128MB
@@ -114,8 +132,8 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 8
-      destinationPath: s3://leseditionsdeparis/
-      endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+      destinationPath: s3://edp-backup/
+      endpointURL: ${LOCAL_S3}
       serverName: &currentCluster postgres16-v1
       s3Credentials:
         accessKeyId:

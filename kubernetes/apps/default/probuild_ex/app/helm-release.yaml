@@ -35,7 +35,7 @@ spec:
       enabled: true
       className: traefik
       hosts:
-        - host: &host "probuild.${PUBLIC_DOMAIN}"
+        - host: &host "probuild.mrdotb.com"
           paths:
             - path: /
               pathType: ImplementationSpecific
@@ -68,7 +68,7 @@ metadata:
   namespace: default
 spec:
   instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4-45
   primaryUpdateStrategy: unsupervised
   storage:
     pvcTemplate:
@@ -78,16 +78,34 @@ spec:
       resources:
         requests:
           storage: 10G
-  bootstrap:
-    initdb:
-      database: probuild_ex
-      owner: probuild_ex
-      secret:
-        name: probuild-ex
+  # bootstrap:
+    # initdb:
+    #   database: probuild_ex
+    #   owner: probuild_ex
+    #   secret:
+    #     name: probuild-ex
   # Note: Bootstrap is needed when recovering from an existing cnpg cluster
   # bootstrap:
-  #   recovery:
-  #     source: &previousCluster postgres16-v1
+    # recovery:
+    #   source: &previousCluster backup
+  # externalClusters:
+    # - name: backup
+    #   barmanObjectStore:
+    #     data:
+    #       compression: bzip2
+    #     wal:
+    #       compression: bzip2
+    #       maxParallel: 8
+    #     destinationPath: s3://probuild-ex/
+    #     endpointURL: "https://s3.mrdotb.com"
+    #     serverName: postgres16-v1
+    #     s3Credentials:
+    #       accessKeyId:
+    #         name: probuild-ex
+    #         key: access_key
+    #       secretAccessKey:
+    #         name: probuild-ex
+    #         key: secret_key
   postgresql:
     parameters:
       shared_buffers: 128MB
