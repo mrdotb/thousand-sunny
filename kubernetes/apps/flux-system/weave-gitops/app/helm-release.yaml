@@ -33,15 +33,15 @@ spec:
     ingress:
       enabled: true
       className: traefik
-      hosts:
-        - host: &host "gitops.${PUBLIC_DOMAIN}"
-          paths:
-            - path: /
-              pathType: Prefix
-      tls:
-        - hosts:
-            - *host
-          secretName: *host
+      # hosts:
+      #   - host: &host "gitops.${PUBLIC_DOMAIN}"
+      #     paths:
+      #       - path: /
+      #         pathType: Prefix
+      # tls:
+      #   - hosts:
+      #       - *host
+      #     secretName: *host
     networkPolicy:
       create: false
     metrics:
