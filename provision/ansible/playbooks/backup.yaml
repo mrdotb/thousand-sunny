@@ -2,11 +2,5 @@
 - hosts:
     - kubernetes
   become: true
-  tasks:
-    - name: Load encrypted vars
-      community.sops.load_vars:
-        file: ../vars.sops.yaml
-        expressions: evaluate-on-load
-
   roles:
     - backup

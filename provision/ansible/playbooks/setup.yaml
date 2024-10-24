@@ -5,10 +5,5 @@
   vars:
     ansible_user: root
     ansible_port: 22
-  tasks:
-    - name: Load encrypted vars
-      community.sops.load_vars:
-        file: ../vars.sops.yaml
-        expressions: evaluate-on-load
   roles:
     - setup

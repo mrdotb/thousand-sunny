@@ -1,5 +1,5 @@
 ---
 kubernetes:
   hosts:
-    stern:
-      ansible_host: 65.109.145.61
+    sail:
+      ansible_host: 88.198.66.84
