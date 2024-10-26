@@ -46,7 +46,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/scarfsage
       pullPolicy: Always
-      tag: "v0.21.0"
+      tag: "v0.23.0"
     imagePullSecrets:
       - name: scarfsage-registry
     service:
@@ -54,15 +54,15 @@ spec:
       port: 4000
       healthcheck: "/up"
     migration:
-      enabled: true
+      enabled: false
       command: ["/app/bin/migrate"]
-    volumeMounts:
-      - name: scarfsage-dir
-        mountPath: /opt/archive_org
-    volumes:
-      - name: scarfsage-dir
-        persistentVolumeClaim:
-          claimName: scarfsage
+    # volumeMounts:
+    #   - name: scarfsage-dir
+    #     mountPath: /opt/archive_org
+    # volumes:
+    #   - name: scarfsage-dir
+    #     persistentVolumeClaim:
+    #       claimName: scarfsage
     resources:
       requests:
         memory: "521Mi"
@@ -77,7 +77,7 @@ metadata:
   namespace: default
 spec:
   instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4-45
   primaryUpdateStrategy: unsupervised
   storage:
     pvcTemplate:
@@ -87,16 +87,33 @@ spec:
       resources:
         requests:
           storage: 10G
-  bootstrap:
-    initdb:
-      database: scarfsage
-      owner: scarfsage
-      secret:
-        name: scarfsage
-  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   initdb:
+  #     database: scarfsage
+  #     owner: scarfsage
+  #     secret:
+  #       name: scarfsage
   # bootstrap:
   #   recovery:
-  #     source: &previousCluster postgres16-v1
+  #     source: &previousCluster backup
+  # externalClusters:
+  #   - name: backup
+  #     barmanObjectStore:
+  #       data:
+  #         compression: bzip2
+  #       wal:
+  #         compression: bzip2
+  #         maxParallel: 8
+  #       destinationPath: s3://scarfsage-backup/
+  #       endpointURL: "https://s3.mrdotb.com"
+  #       serverName: postgres16-v1
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: scarfsage
+  #           key: backup_access_key
+  #         secretAccessKey:
+  #           name: scarfsage
+  #           key: backup_secret_key
   postgresql:
     parameters:
       shared_buffers: "256MB"
@@ -109,7 +126,7 @@ spec:
   monitoring:
     enablePodMonitor: true
   backup:
-    retentionPolicy: 3d
+    retentionPolicy: 30d
     barmanObjectStore:
       data:
         compression: bzip2
@@ -117,7 +134,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://scarfsage-backup/
-      endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+      endpointURL: ${LOCAL_S3}
       serverName: &currentCluster postgres16-v1
       s3Credentials:
         accessKeyId:

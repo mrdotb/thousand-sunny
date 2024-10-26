@@ -24,32 +24,19 @@ spec:
     kind: ClusterIssuer
   dnsNames:
     - "minio.${PUBLIC_DOMAIN}"
-# ---
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: "cdn.tontontresors.com"
-#   namespace: storage
-# spec:
-#   secretName: "cdn.tontontresors.com"
-#   issuerRef:
-#     name: letsencrypt-prod
-#     kind: ClusterIssuer
-#   dnsNames:
-#     - "cdn.tontontresors.com"
-# ---
-# apiVersion: cert-manager.io/v1
-# kind: Certificate
-# metadata:
-#   name: "cdn.scarfsage.com"
-#   namespace: storage
-# spec:
-#   secretName: "cdn.scarfsage.com"
-#   issuerRef:
-#     name: letsencrypt-prod
-#     kind: ClusterIssuer
-#   dnsNames:
-#     - "cdn.scarfsage.com"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "cdn.scarfsage.com"
+  namespace: storage
+spec:
+  secretName: "cdn.scarfsage.com"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "cdn.scarfsage.com"
 # ---
 # apiVersion: cert-manager.io/v1
 # kind: Certificate

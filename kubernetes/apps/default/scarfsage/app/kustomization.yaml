@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: default
 resources:
   - ./secret.sops.yaml
+  - ./registry
   - ./helm-release.yaml
   - ./certificate.yaml
-  - ./pvc.yaml
-  - ./registry
+  # - ./pvc.yaml

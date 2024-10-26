@@ -27,6 +27,8 @@ spec:
       ingressClassName: traefik
       hostname: vintagesta.com
       tls: true
+    service:
+      type: ClusterIP
     resources:
       requests:
         memory: "500Mi"
