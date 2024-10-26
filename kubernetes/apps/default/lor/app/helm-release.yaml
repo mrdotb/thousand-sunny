@@ -26,7 +26,7 @@ spec:
       retries: 3
   values:
     app: lor
-    replicaCount: 1
+    replicaCount: 0
     secret:
       existingSecret: lor
       create: false
@@ -106,7 +106,7 @@ spec:
       retries: 3
   values:
     app: lor
-    replicaCount: 1
+    replicaCount: 0
     secret:
       existingSecret: lor
       create: false
@@ -192,10 +192,10 @@ spec:
       serverName: &currentCluster postgres16-v1
       s3Credentials:
         accessKeyId:
-          name: ttr
+          name: lor
           key: access_key
         secretAccessKey:
-          name: ttr
+          name: lor
           key: secret_key
 ---
 apiVersion: postgresql.cnpg.io/v1
