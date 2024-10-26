@@ -179,34 +179,34 @@ spec:
       memory: "1Gi"
   monitoring:
     enablePodMonitor: true
-  backup:
-    retentionPolicy: 30d
-    barmanObjectStore:
-      data:
-        compression: bzip2
-      wal:
-        compression: bzip2
-        maxParallel: 8
-      destinationPath: s3://ttr-backup/
-      endpointURL: "https://s3.${PUBLIC_DOMAIN}"
-      serverName: &currentCluster postgres16-v1
-      s3Credentials:
-        accessKeyId:
-          name: ttr
-          key: access_key
-        secretAccessKey:
-          name: ttr
-          key: secret_key
----
-apiVersion: postgresql.cnpg.io/v1
-kind: ScheduledBackup
-metadata:
-  name: lor-postgres-scheduled-backup
-  namespace: default
-spec:
-  immediate: true
-  schedule: "@weekly"
-  cluster:
-    name: lor-postgres
-  target: primary
-  method: barmanObjectStore
+  # backup:
+  #   retentionPolicy: 30d
+  #   barmanObjectStore:
+  #     data:
+  #       compression: bzip2
+  #     wal:
+  #       compression: bzip2
+  #       maxParallel: 8
+  #     destinationPath: s3://lor-backup/
+  #     endpointURL: "https://s3.${PUBLIC_DOMAIN}"
+  #     serverName: &currentCluster postgres16-v1
+  #     s3Credentials:
+  #       accessKeyId:
+  #         name: ttr
+  #         key: access_key
+  #       secretAccessKey:
+  #         name: ttr
+  #         key: secret_key
+# ---
+# apiVersion: postgresql.cnpg.io/v1
+# kind: ScheduledBackup
+# metadata:
+  # name: lor-postgres-scheduled-backup
+  # namespace: default
+# spec:
+  # immediate: true
+  # schedule: "@weekly"
+  # cluster:
+  #   name: lor-postgres
+  # target: primary
+  # method: barmanObjectStore
