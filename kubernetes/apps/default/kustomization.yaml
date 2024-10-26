@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - ./namespace.yaml
   - ./leseditionsdeparis/ks.yaml
-  # - ./lor/ks.yaml
+  - ./lor/ks.yaml
   - ./probuild_ex/ks.yaml
   # - ./ttr/ks.yaml
   # - ./scarfsage/ks.yaml

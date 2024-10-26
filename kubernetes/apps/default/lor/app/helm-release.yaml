@@ -64,7 +64,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.29.1"
+      tag: "v0.30.0"
     service:
       type: ClusterIP
       port: 4000
@@ -126,7 +126,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.29.1"
+      tag: "v0.30.0"
     service:
       type: ClusterIP
       port: 3000
@@ -148,7 +148,7 @@ metadata:
   namespace: default
 spec:
   instances: 1
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.0-10
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4-45
   primaryUpdateStrategy: unsupervised
   storage:
     pvcTemplate:
@@ -158,16 +158,33 @@ spec:
       resources:
         requests:
           storage: 10G
-  bootstrap:
-    initdb:
-      database: lor
-      owner: lor
-      secret:
-        name: lor
-  # Note: Bootstrap is needed when recovering from an existing cnpg cluster
+  # bootstrap:
+  #   initdb:
+  #     database: lor
+  #     owner: lor
+  #     secret:
+  #       name: lor
   # bootstrap:
   #   recovery:
-  #     source: &previousCluster postgres16-v1
+  #     source: &previousCluster backup
+  # externalClusters:
+  #   - name: backup
+  #     barmanObjectStore:
+  #       data:
+  #         compression: bzip2
+  #       wal:
+  #         compression: bzip2
+  #         maxParallel: 8
+  #       destinationPath: s3://lor-backup/
+  #       endpointURL: "https://s3.mrdotb.com"
+  #       serverName: postgres16-v1
+  #       s3Credentials:
+  #         accessKeyId:
+  #           name: lor
+  #           key: backup_access_key
+  #         secretAccessKey:
+  #           name: lor
+  #           key: backup_secret_key
   postgresql:
     parameters:
       shared_buffers: 128MB
@@ -179,34 +196,34 @@ spec:
       memory: "1Gi"
   monitoring:
     enablePodMonitor: true
-  # backup:
-  #   retentionPolicy: 30d
-  #   barmanObjectStore:
-  #     data:
-  #       compression: bzip2
-  #     wal:
-  #       compression: bzip2
-  #       maxParallel: 8
-  #     destinationPath: s3://ttr-backup/
-  #     endpointURL: "https://s3.${PUBLIC_DOMAIN}"
-  #     serverName: &currentCluster postgres16-v1
-  #     s3Credentials:
-  #       accessKeyId:
-  #         name: ttr
-  #         key: access_key
-  #       secretAccessKey:
-  #         name: ttr
-  #         key: secret_key
-# ---
-# apiVersion: postgresql.cnpg.io/v1
-# kind: ScheduledBackup
-# metadata:
-#   name: lor-postgres-scheduled-backup
-#   namespace: default
-# spec:
-#   immediate: true
-#   schedule: "@weekly"
-#   cluster:
-#     name: lor-postgres
-#   target: primary
-#   method: barmanObjectStore
+  backup:
+    retentionPolicy: 30d
+    barmanObjectStore:
+      data:
+        compression: bzip2
+      wal:
+        compression: bzip2
+        maxParallel: 8
+      destinationPath: s3://lor-backup/
+      endpointURL: ${LOCAL_S3}
+      serverName: &currentCluster postgres16-v1
+      s3Credentials:
+        accessKeyId:
+          name: lor
+          key: access_key
+        secretAccessKey:
+          name: lor
+          key: secret_key
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: lor-postgres-scheduled-backup
+  namespace: default
+spec:
+  immediate: true
+  schedule: "@weekly"
+  cluster:
+    name: lor-postgres
+  target: primary
+  method: barmanObjectStore
