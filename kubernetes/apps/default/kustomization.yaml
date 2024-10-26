@@ -7,5 +7,5 @@ resources:
   - ./lor/ks.yaml
   - ./probuild_ex/ks.yaml
   - ./scarfsage/ks.yaml
-  # - ./dotb/ks.yaml
   - ./vintagesta/ks.yaml
+  - ./dotb/ks.yaml
