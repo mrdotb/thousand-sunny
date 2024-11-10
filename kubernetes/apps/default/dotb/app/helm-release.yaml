@@ -66,10 +66,10 @@ spec:
       command: ["/app/bin/migrate"]
     resources:
       requests:
-        memory: "500Mi"
-        cpu: "100m"
+        memory: "1024Mi"
+        cpu: "200m"
       limits:
-        memory: "500Mi"
+        memory: "1024Mi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
