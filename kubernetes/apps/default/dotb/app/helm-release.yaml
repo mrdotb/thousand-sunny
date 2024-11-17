@@ -62,7 +62,7 @@ spec:
       port: 4000
       healthcheck: /up
     migration:
-      enabled: false
+      enabled: true
       command: ["/app/bin/migrate"]
     resources:
       requests:
