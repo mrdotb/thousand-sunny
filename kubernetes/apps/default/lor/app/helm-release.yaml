@@ -62,9 +62,11 @@ spec:
             - *host
           secretName: *host
     image:
-      repository: ghcr.io/mrdotb/leagueofreplays
+      repository: ghcr.io/mrdotb/leagueofreplays.co
       pullPolicy: Always
-      tag: "v0.30.0"
+      tag: "v0.31.0"
+    imagePullSecrets:
+      - name: lor-registry
     service:
       type: ClusterIP
       port: 4000
