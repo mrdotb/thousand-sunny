@@ -126,7 +126,7 @@ spec:
             - path: /
               pathType: ImplementationSpecific
     image:
-      repository: ghcr.io/mrdotb/leagueofreplays
+      repository: ghcr.io/mrdotb/leagueofreplays.co
       pullPolicy: Always
       tag: "v0.31.2"
     imagePullSecrets:
