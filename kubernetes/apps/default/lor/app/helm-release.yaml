@@ -64,7 +64,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays.co
       pullPolicy: Always
-      tag: "v0.31.0"
+      tag: "v0.31.1"
     imagePullSecrets:
       - name: lor-registry
     service:
@@ -128,7 +128,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays
       pullPolicy: Always
-      tag: "v0.30.0"
+      tag: "v0.31.1"
     service:
       type: ClusterIP
       port: 3000
