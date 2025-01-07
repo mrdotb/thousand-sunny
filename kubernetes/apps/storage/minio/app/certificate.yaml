@@ -41,6 +41,19 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
+  name: "b.scarfsage.com"
+  namespace: storage
+spec:
+  secretName: "b.scarfsage.com"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  dnsNames:
+    - "b.scarfsage.com"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
   name: "cdn.dotb.io"
   namespace: storage
 spec:
