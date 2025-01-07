@@ -8,4 +8,5 @@ resources:
   - ./helm-release.yaml
   - ./scarfsage-ingress.yaml
   - ./dotb-ingress.yaml
+  - ./scarfsage-bucket2-ingress.yaml
   # - ./cron-job.yaml
