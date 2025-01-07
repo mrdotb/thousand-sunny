@@ -48,7 +48,7 @@ spec:
       - name: QUEUE_PRO_PLATFORMS
         value: "euw1,kr"
       - name: OBAN_QUEUES
-        value: "default,10"
+        value: "default,10,google,2"
     ingress:
       enabled: true
       className: traefik
@@ -64,7 +64,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays.co
       pullPolicy: Always
-      tag: "v0.33.2"
+      tag: "v0.34.0"
     imagePullSecrets:
       - name: lor-registry
     service:
@@ -128,7 +128,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays.co
       pullPolicy: Always
-      tag: "v0.33.2"
+      tag: "v0.34.0"
     imagePullSecrets:
       - name: lor-registry
     service:
