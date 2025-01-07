@@ -48,7 +48,7 @@ spec:
       - name: QUEUE_PRO_PLATFORMS
         value: "euw1,kr"
       - name: OBAN_QUEUES
-        value: "default,10,google,2"
+        value: "default,10 google,2"
     ingress:
       enabled: true
       className: traefik
