@@ -64,7 +64,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays.co
       pullPolicy: Always
-      tag: "v0.36.1"
+      tag: "v0.37.0"
     imagePullSecrets:
       - name: lor-registry
     service:
@@ -128,7 +128,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/leagueofreplays.co
       pullPolicy: Always
-      tag: "v0.36.1"
+      tag: "v0.37.0"
     imagePullSecrets:
       - name: lor-registry
     service:
