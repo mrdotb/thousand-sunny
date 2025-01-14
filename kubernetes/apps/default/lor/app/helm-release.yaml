@@ -76,10 +76,10 @@ spec:
       command: ["/app/bin/migrate"]
     resources:
       requests:
-        memory: "793Mi"
+        memory: "800Mi"
         cpu: "126m"
       limits:
-        memory: "793Mi"
+        memory: "800Mi"
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
