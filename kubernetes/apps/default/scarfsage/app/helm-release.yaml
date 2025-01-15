@@ -65,10 +65,10 @@ spec:
     #       claimName: scarfsage
     resources:
       requests:
-        memory: "521Mi"
-        cpu: "11m"
+        memory: "512Mi"
+        cpu: "25m"
       limits:
-        memory: "521Mi"
+        memory: "512Mi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
@@ -178,7 +178,7 @@ spec:
       existingMasterKeySecret: scarfsage
     resources:
       requests:
-        memory: "100Mi"
+        memory: "128Mi"
         cpu: "10m"
       limits:
-        memory: "100Mi"
+        memory: "128Mi"
