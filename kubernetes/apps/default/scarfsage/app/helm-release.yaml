@@ -119,10 +119,10 @@ spec:
       shared_buffers: "256MB"
   resources:
     requests:
-      memory: "1024Mi"
+      memory: "768Mi"
       cpu: "250m"
     limits:
-      memory: "1Gi"
+      memory: "768Mi"
   monitoring:
     enablePodMonitor: true
   backup:
