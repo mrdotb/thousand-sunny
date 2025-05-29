@@ -226,7 +226,7 @@ metadata:
   namespace: default
 spec:
   immediate: true
-  schedule: "@weekly"
+  schedule: "0 3 * * 1"  # Every Monday at 03:00
   cluster:
     name: lor-postgres
   target: primary
