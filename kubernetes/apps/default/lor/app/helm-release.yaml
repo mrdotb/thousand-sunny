@@ -208,7 +208,7 @@ spec:
       wal:
         compression: bzip2
         maxParallel: 8
-      destinationPath: s3://lor-backup/lor/
+      destinationPath: s3://lor-backup/
       endpointURL: https://lor-backup.s3.eu-central-003.backblazeb2.com
       serverName: &currentCluster postgres16-v1
       s3Credentials:
