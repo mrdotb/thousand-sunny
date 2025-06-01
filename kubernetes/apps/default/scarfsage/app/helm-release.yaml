@@ -136,7 +136,7 @@ spec:
         compression: bzip2
         maxParallel: 8
       destinationPath: s3://scarfsage-backup/
-      endpointURL: ${LOCAL_S3}
+      endpointURL: https://scarfsage-backup.s3.eu-central-003.backblazeb2.com
       serverName: &currentCluster postgres16-v1
       s3Credentials:
         accessKeyId:
@@ -153,7 +153,7 @@ metadata:
   namespace: default
 spec:
   immediate: true
-  schedule: "@weekly"
+  schedule: "0 3 * * 2"  # Every Tuesday at 03:00
   cluster:
     name: scarfsage-postgres
   target: primary
