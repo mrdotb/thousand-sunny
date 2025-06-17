@@ -122,14 +122,16 @@ spec:
   postgresql:
     parameters:
       shared_buffers: "1GB"
+      work_mem: "16MB"
+      maintenance_work_mem: "512MB"
       pg_stat_statements.max: "10000"
       pg_stat_statements.track: all
   resources:
     requests:
-      memory: "4096Mi"
+      memory: "8Gi"
       cpu: "500m"
     limits:
-      memory: "4096Mi"
+      memory: "8Gi"
   monitoring:
     enablePodMonitor: true
   backup:
