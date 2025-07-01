@@ -26,7 +26,7 @@ spec:
       retries: 3
   values:
     app: lor
-    replicaCount: 1
+    replicaCount: 0
     secret:
       existingSecret: lor
       create: false
@@ -108,7 +108,7 @@ spec:
       retries: 3
   values:
     app: lor
-    replicaCount: 1
+    replicaCount: 0
     secret:
       existingSecret: lor
       create: false
