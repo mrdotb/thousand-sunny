@@ -54,7 +54,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.104.0"
+      tag: "v0.106.0"
     imagePullSecrets:
       - name: dotb-registry
     service:
@@ -66,10 +66,10 @@ spec:
       command: ["/app/bin/migrate"]
     resources:
       requests:
-        memory: "2048Mi"
-        cpu: "1"
+        memory: "4Gi"
+        cpu: "2"
       limits:
-        memory: "2048Mi"
+        memory: "4Gi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
