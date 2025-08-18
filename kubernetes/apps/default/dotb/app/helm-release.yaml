@@ -40,7 +40,7 @@ spec:
       - name: LIBCLUSTER
         value: "true"
       - name: EXTENSION_VERSION
-        value: "2.17.1"
+        value: "2.17.2"
     ingress:
       enabled: true
       className: traefik
