@@ -40,7 +40,7 @@ spec:
       - name: LIBCLUSTER
         value: "true"
       - name: EXTENSION_VERSION
-        value: "3.0.0"
+        value: "3.0.1"
     ingress:
       enabled: true
       className: traefik
@@ -56,7 +56,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.120.0"
+      tag: "v0.121.1"
     imagePullSecrets:
       - name: dotb-registry
     service:
