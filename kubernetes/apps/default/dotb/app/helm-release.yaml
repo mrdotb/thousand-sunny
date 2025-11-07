@@ -161,8 +161,8 @@ metadata:
   name: dotb-postgres-scheduled-backup
   namespace: default
 spec:
-  immediate: false
-  schedule: "0 0 3 * * 1"  # Every Monday at 03:00 UTC
+  immediate: true
+  schedule: "0 0 3 * * *"  # Every Day at 03:00 UTC
   cluster:
     name: dotb-postgres
   target: primary
