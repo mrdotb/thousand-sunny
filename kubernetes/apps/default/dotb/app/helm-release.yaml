@@ -131,7 +131,7 @@ spec:
   resources:
     requests:
       memory: "8Gi"
-      cpu: "500m"
+      cpu: "2000m"
     limits:
       memory: "8Gi"
   monitoring:
