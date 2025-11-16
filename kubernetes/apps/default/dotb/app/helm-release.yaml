@@ -56,7 +56,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.147.1"
+      tag: "v0.148.0"
     imagePullSecrets:
       - name: dotb-registry
     service:
@@ -69,7 +69,7 @@ spec:
     resources:
       requests:
         memory: "4Gi"
-        cpu: "2"
+        cpu: "3"
       limits:
         memory: "4Gi"
 ---
