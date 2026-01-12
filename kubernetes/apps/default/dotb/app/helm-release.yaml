@@ -40,7 +40,7 @@ spec:
       - name: LIBCLUSTER
         value: "true"
       - name: EXTENSION_VERSION
-        value: "3.17.0"
+        value: "3.18.0"
       - name: AI_FEATURES_ENABLED
         value: "true"
     ingress:
@@ -58,7 +58,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.175.0"
+      tag: "v0.175.1"
     imagePullSecrets:
       - name: dotb-registry
     service:
