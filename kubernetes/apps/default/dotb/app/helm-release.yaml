@@ -40,7 +40,7 @@ spec:
       - name: LIBCLUSTER
         value: "true"
       - name: EXTENSION_VERSION
-        value: "3.22.0"
+        value: "3.23.0"
       - name: AI_FEATURES_ENABLED
         value: "true"
     ingress:
