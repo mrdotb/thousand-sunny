@@ -125,17 +125,17 @@ spec:
   #           key: backup_secret_key
   postgresql:
     parameters:
-      shared_buffers: "1GB"
-      work_mem: "16MB"
-      maintenance_work_mem: "512MB"
+      shared_buffers: "2GB"
+      work_mem: "32MB"
+      maintenance_work_mem: "1024MB"
       pg_stat_statements.max: "10000"
       pg_stat_statements.track: all
   resources:
     requests:
-      memory: "8Gi"
+      memory: "16Gi"
       cpu: "2000m"
     limits:
-      memory: "8Gi"
+      memory: "16Gi"
   monitoring:
     enablePodMonitor: true
   backup:
