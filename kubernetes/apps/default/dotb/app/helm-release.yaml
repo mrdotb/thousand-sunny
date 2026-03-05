@@ -43,6 +43,8 @@ spec:
         value: "3.31.0"
       - name: AI_FEATURES_ENABLED
         value: "true"
+      - name: POOL_SIZE
+        value: "20"
     ingress:
       enabled: true
       className: traefik
