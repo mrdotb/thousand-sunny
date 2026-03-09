@@ -41,10 +41,12 @@ spec:
         value: "true"
       - name: EXTENSION_VERSION
         value: "3.31.0"
-      - name: AI_FEATURES_ENABLED
-        value: "true"
       - name: POOL_SIZE
         value: "20"
+      - name: ITEM_CREATION_ENABLED
+        value: "false"
+      - name: AI_LISTING_GENERATION_ENABLED
+        value: "false"
     ingress:
       enabled: true
       className: traefik
@@ -60,7 +62,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.215.0"
+      tag: "v0.217.0"
     imagePullSecrets:
       - name: dotb-registry
     service:
