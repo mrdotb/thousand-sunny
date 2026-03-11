@@ -40,11 +40,11 @@ spec:
       - name: LIBCLUSTER
         value: "true"
       - name: EXTENSION_VERSION
-        value: "3.31.0"
+        value: "3.32.0"
       - name: POOL_SIZE
         value: "20"
       - name: ITEM_CREATION_ENABLED
-        value: "false"
+        value: "true"
       - name: AI_LISTING_GENERATION_ENABLED
         value: "false"
     ingress:
