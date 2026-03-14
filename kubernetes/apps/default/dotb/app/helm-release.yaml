@@ -46,7 +46,7 @@ spec:
       - name: ITEM_CREATION_ENABLED
         value: "true"
       - name: AI_LISTING_GENERATION_ENABLED
-        value: "false"
+        value: "true"
     ingress:
       enabled: true
       className: traefik
