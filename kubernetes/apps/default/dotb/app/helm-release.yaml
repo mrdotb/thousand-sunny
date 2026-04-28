@@ -62,7 +62,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.254.0"
+      tag: "v0.255.0"
     imagePullSecrets:
       - name: dotb-registry
     service:
