@@ -40,7 +40,7 @@ spec:
       - name: LIBCLUSTER
         value: "true"
       - name: EXTENSION_VERSION
-        value: "3.46.0"
+        value: "3.47.0"
       - name: POOL_SIZE
         value: "20"
       - name: ITEM_CREATION_ENABLED
@@ -62,7 +62,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.276.0"
+      tag: "v0.277.0"
     imagePullSecrets:
       - name: dotb-registry
     service:
