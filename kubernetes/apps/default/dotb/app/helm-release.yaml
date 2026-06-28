@@ -75,9 +75,9 @@ spec:
     resources:
       requests:
         memory: "4Gi"
-        cpu: "3"
+        cpu: "4"
       limits:
-        memory: "4Gi"
+        memory: "8Gi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
