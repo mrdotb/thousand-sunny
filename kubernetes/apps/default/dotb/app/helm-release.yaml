@@ -58,7 +58,7 @@ spec:
     image:
       repository: ghcr.io/mrdotb/dotb
       pullPolicy: Always
-      tag: "v0.292.0"
+      tag: "v0.294.1"
     imagePullSecrets:
       - name: dotb-registry
     service:
@@ -73,7 +73,7 @@ spec:
         memory: "4Gi"
         cpu: "4"
       limits:
-        memory: "8Gi"
+        memory: "12Gi"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
