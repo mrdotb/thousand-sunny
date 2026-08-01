@@ -40,7 +40,7 @@ spec:
       - name: LIBCLUSTER
         value: "true"
       - name: EXTENSION_VERSION
-        value: "3.54.2"
+        value: "3.54.3"
       - name: POOL_SIZE
         value: "20"
       - name: REGISTRATION_DISABLED
